@@ -1,4 +1,4 @@
-package co.sn.ui.base;
+package co.classplus.ui.base;
 
 import android.annotation.TargetApi;
 import android.app.ProgressDialog;
@@ -20,15 +20,15 @@ import android.view.inputmethod.InputMethodManager;
 import java.util.ArrayList;
 
 import butterknife.Unbinder;
-import co.sn.App;
-import co.sn.app.R;
-import co.sn.di.component.ActivityComponent;
-import co.sn.di.component.DaggerActivityComponent;
-import co.sn.di.module.ActivityModule;
-import co.sn.utils.AppLogger;
-import co.sn.utils.CommonUtils;
-import co.sn.utils.NetworkUtils;
-import co.sn.utils.ViewUtils;
+import co.classplus.App;
+import co.classplus.app.R;
+import co.classplus.di.component.ActivityComponent;
+import co.classplus.di.component.DaggerActivityComponent;
+import co.classplus.di.module.ActivityModule;
+import co.classplus.utils.AppLogger;
+import co.classplus.utils.CommonUtils;
+import co.classplus.utils.NetworkUtils;
+import co.classplus.utils.ViewUtils;
 import rebus.permissionutils.PermissionEnum;
 import rebus.permissionutils.PermissionManager;
 import rebus.permissionutils.PermissionUtils;

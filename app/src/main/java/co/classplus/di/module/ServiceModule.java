@@ -1,11 +1,11 @@
-package co.sn.di.module;
+package co.classplus.di.module;
 
 import android.app.Service;
 import android.content.Context;
 
-import co.sn.di.ServiceContext;
-import co.sn.utils.rx.SchedulerProvider;
-import co.sn.utils.rx.SchedulerProviderImpl;
+import co.classplus.di.ServiceContext;
+import co.classplus.utils.rx.SchedulerProvider;
+import co.classplus.utils.rx.SchedulerProviderImpl;
 import dagger.Module;
 import dagger.Provides;
 import io.reactivex.disposables.CompositeDisposable;

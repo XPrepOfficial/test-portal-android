@@ -1,4 +1,4 @@
-package co.sn.utils.rx;
+package co.classplus.utils.rx;
 
 import io.reactivex.Scheduler;
 

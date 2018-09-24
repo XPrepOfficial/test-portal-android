@@ -1,12 +1,12 @@
-package co.sn.data.network;
+package co.classplus.data.network;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.util.concurrent.TimeUnit;
 
-import co.sn.app.BuildConfig;
-import co.sn.data.network.retrofit.RxErrorHandlingCallAdapterFactory;
+import co.classplus.app.BuildConfig;
+import co.classplus.data.network.retrofit.RxErrorHandlingCallAdapterFactory;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;

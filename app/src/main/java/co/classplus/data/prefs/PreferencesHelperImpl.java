@@ -1,4 +1,4 @@
-package co.sn.data.prefs;
+package co.classplus.data.prefs;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -6,8 +6,8 @@ import android.content.SharedPreferences;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import co.sn.di.ApplicationContext;
-import co.sn.di.PreferenceInfo;
+import co.classplus.di.ApplicationContext;
+import co.classplus.di.PreferenceInfo;
 
 @Singleton
 public class PreferencesHelperImpl implements PreferencesHelper {

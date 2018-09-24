@@ -1,18 +1,18 @@
-package co.sn.di.module;
+package co.classplus.di.module;
 
 import android.app.Activity;
 import android.content.Context;
 
-import co.sn.di.ActivityContext;
-import co.sn.di.PerActivity;
-import co.sn.ui.base.BasePresenter;
-import co.sn.ui.base.MvpPresenter;
-import co.sn.ui.base.MvpView;
-import co.sn.ui.youtube.VideosPresenter;
-import co.sn.ui.youtube.VideosPresenterImpl;
-import co.sn.ui.youtube.VideosView;
-import co.sn.utils.rx.SchedulerProvider;
-import co.sn.utils.rx.SchedulerProviderImpl;
+import co.classplus.di.ActivityContext;
+import co.classplus.di.PerActivity;
+import co.classplus.ui.base.BasePresenter;
+import co.classplus.ui.base.MvpPresenter;
+import co.classplus.ui.base.MvpView;
+import co.classplus.ui.youtube.VideosPresenter;
+import co.classplus.ui.youtube.VideosPresenterImpl;
+import co.classplus.ui.youtube.VideosView;
+import co.classplus.utils.rx.SchedulerProvider;
+import co.classplus.utils.rx.SchedulerProviderImpl;
 import dagger.Module;
 import dagger.Provides;
 import io.reactivex.disposables.CompositeDisposable;

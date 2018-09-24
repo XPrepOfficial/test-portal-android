@@ -1,8 +1,8 @@
-package co.sn.ui.base;
+package co.classplus.ui.base;
 
 import android.os.Bundle;
 
-import co.sn.data.network.retrofit.RetrofitException;
+import co.classplus.data.network.retrofit.RetrofitException;
 import rebus.permissionutils.PermissionEnum;
 
 public interface MvpPresenter<V extends MvpView> {

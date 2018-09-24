@@ -1,4 +1,4 @@
-package co.sn.data.network.retrofit;
+package co.classplus.data.network.retrofit;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;

@@ -1,4 +1,4 @@
-package co.sn.utils;
+package co.classplus.utils;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -20,7 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-import co.sn.app.R;
+import co.classplus.app.R;
 import rebus.permissionutils.PermissionEnum;
 
 public final class CommonUtils {

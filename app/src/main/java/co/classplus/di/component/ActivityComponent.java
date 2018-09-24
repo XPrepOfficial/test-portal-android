@@ -1,8 +1,8 @@
-package co.sn.di.component;
+package co.classplus.di.component;
 
-import co.sn.di.PerActivity;
-import co.sn.di.module.ActivityModule;
-import co.sn.ui.youtube.VideosActivity;
+import co.classplus.di.PerActivity;
+import co.classplus.di.module.ActivityModule;
+import co.classplus.ui.youtube.VideosActivity;
 import dagger.Component;
 
 @PerActivity

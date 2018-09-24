@@ -1,7 +1,7 @@
-package co.sn.di.component;
+package co.classplus.di.component;
 
-import co.sn.di.PerActivity;
-import co.sn.di.module.ServiceModule;
+import co.classplus.di.PerActivity;
+import co.classplus.di.module.ServiceModule;
 import dagger.Component;
 
 @PerActivity

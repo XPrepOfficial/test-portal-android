@@ -1,4 +1,4 @@
-package co.sn.utils.rx;
+package co.classplus.utils.rx;
 
 import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;

@@ -1,22 +1,22 @@
-package co.sn.di.module;
+package co.classplus.di.module;
 
 import android.app.Application;
 import android.content.Context;
 
 import javax.inject.Singleton;
 
-import co.sn.data.DataManager;
-import co.sn.data.DataManagerImpl;
-import co.sn.data.network.ApiHelper;
-import co.sn.data.network.ApiHelperImpl;
-import co.sn.data.prefs.PreferencesHelper;
-import co.sn.data.prefs.PreferencesHelperImpl;
-import co.sn.di.ApplicationContext;
-import co.sn.di.PreferenceInfo;
+import co.classplus.data.DataManager;
+import co.classplus.data.DataManagerImpl;
+import co.classplus.data.network.ApiHelper;
+import co.classplus.data.network.ApiHelperImpl;
+import co.classplus.data.prefs.PreferencesHelper;
+import co.classplus.data.prefs.PreferencesHelperImpl;
+import co.classplus.di.ApplicationContext;
+import co.classplus.di.PreferenceInfo;
 import dagger.Module;
 import dagger.Provides;
 
-import static co.sn.data.prefs.PreferencesHelperImpl.PREF_NAME;
+import static co.classplus.data.prefs.PreferencesHelperImpl.PREF_NAME;
 
 @Module
 public class ApplicationModule {

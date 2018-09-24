@@ -1,4 +1,4 @@
-package co.sn.ui.base;
+package co.classplus.ui.base;
 
 import android.support.annotation.StringRes;
 import android.view.ViewGroup;

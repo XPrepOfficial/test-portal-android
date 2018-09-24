@@ -1,7 +1,7 @@
-package co.sn.data;
+package co.classplus.data;
 
-import co.sn.data.network.ApiHelper;
-import co.sn.data.prefs.PreferencesHelper;
+import co.classplus.data.network.ApiHelper;
+import co.classplus.data.prefs.PreferencesHelper;
 
 public interface DataManager extends PreferencesHelper, ApiHelper {
 }

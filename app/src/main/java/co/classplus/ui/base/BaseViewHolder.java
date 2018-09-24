@@ -1,4 +1,4 @@
-package co.sn.ui.base;
+package co.classplus.ui.base;
 
 import android.content.Context;
 import android.support.annotation.StringRes;
@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
-import co.sn.di.component.ActivityComponent;
+import co.classplus.di.component.ActivityComponent;
 import rebus.permissionutils.PermissionEnum;
 
 public abstract class BaseViewHolder extends RecyclerView.ViewHolder implements MvpView {

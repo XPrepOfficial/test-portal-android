@@ -1,4 +1,4 @@
-package co.sn.ui.base;
+package co.classplus.ui.base;
 
 import android.annotation.TargetApi;
 import android.app.ProgressDialog;
@@ -15,10 +15,10 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import butterknife.Unbinder;
-import co.sn.di.component.ActivityComponent;
-import co.sn.utils.AppLogger;
-import co.sn.utils.CommonUtils;
-import co.sn.utils.ViewUtils;
+import co.classplus.di.component.ActivityComponent;
+import co.classplus.utils.AppLogger;
+import co.classplus.utils.CommonUtils;
+import co.classplus.utils.ViewUtils;
 import rebus.permissionutils.PermissionEnum;
 import rebus.permissionutils.PermissionManager;
 import rebus.permissionutils.PermissionUtils;

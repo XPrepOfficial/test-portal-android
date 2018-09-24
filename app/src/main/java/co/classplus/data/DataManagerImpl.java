@@ -1,15 +1,13 @@
-package co.sn.data;
+package co.classplus.data;
 
 import android.content.Context;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import co.sn.data.model.ListingYoutubeItemModel;
-import co.sn.data.model.SearchYoutubeItemModel;
-import co.sn.data.network.ApiHelper;
-import co.sn.data.prefs.PreferencesHelper;
-import co.sn.di.ApplicationContext;
+import co.classplus.data.network.ApiHelper;
+import co.classplus.data.prefs.PreferencesHelper;
+import co.classplus.di.ApplicationContext;
 import io.reactivex.Observable;
 
 @Singleton

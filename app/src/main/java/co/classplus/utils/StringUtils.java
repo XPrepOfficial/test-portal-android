@@ -1,4 +1,4 @@
-package co.sn.utils;
+package co.classplus.utils;
 
 public class StringUtils {
 

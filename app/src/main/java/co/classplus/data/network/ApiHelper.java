@@ -1,7 +1,5 @@
-package co.sn.data.network;
+package co.classplus.data.network;
 
-import co.sn.data.model.ListingYoutubeItemModel;
-import co.sn.data.model.SearchYoutubeItemModel;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Query;

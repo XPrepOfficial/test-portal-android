@@ -1,4 +1,4 @@
-package co.sn.utils;
+package co.classplus.utils;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
-import co.sn.app.R;
+import co.classplus.app.R;
 
 public final class ViewUtils {
 

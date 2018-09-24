@@ -1,4 +1,4 @@
-package co.sn;
+package co.classplus;
 
 import android.app.Application;
 import android.graphics.Bitmap;
@@ -13,12 +13,12 @@ import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
 
 import javax.inject.Inject;
 
-import co.sn.app.BuildConfig;
-import co.sn.data.DataManager;
-import co.sn.di.component.ApplicationComponent;
-import co.sn.di.component.DaggerApplicationComponent;
-import co.sn.di.module.ApplicationModule;
-import co.sn.utils.AppLogger;
+import co.classplus.app.BuildConfig;
+import co.classplus.data.DataManager;
+import co.classplus.di.component.ApplicationComponent;
+import co.classplus.di.component.DaggerApplicationComponent;
+import co.classplus.di.module.ApplicationModule;
+import co.classplus.utils.AppLogger;
 
 public class App extends Application {
 

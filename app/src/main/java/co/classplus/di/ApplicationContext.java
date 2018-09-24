@@ -1,4 +1,4 @@
-package co.sn.di;
+package co.classplus.di;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

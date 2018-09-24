@@ -1,14 +1,14 @@
-package co.sn.ui.base;
+package co.classplus.ui.base;
 
 import android.os.Bundle;
 
 import javax.inject.Inject;
 
-import co.sn.app.R;
-import co.sn.data.DataManager;
-import co.sn.data.network.retrofit.RetrofitException;
-import co.sn.utils.CommonUtils;
-import co.sn.utils.rx.SchedulerProvider;
+import co.classplus.app.R;
+import co.classplus.data.DataManager;
+import co.classplus.data.network.retrofit.RetrofitException;
+import co.classplus.utils.CommonUtils;
+import co.classplus.utils.rx.SchedulerProvider;
 import io.reactivex.disposables.CompositeDisposable;
 import rebus.permissionutils.PermissionEnum;
 

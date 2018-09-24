@@ -1,14 +1,14 @@
-package co.sn.di.component;
+package co.classplus.di.component;
 
 import android.app.Application;
 import android.content.Context;
 
 import javax.inject.Singleton;
 
-import co.sn.App;
-import co.sn.data.DataManager;
-import co.sn.di.ApplicationContext;
-import co.sn.di.module.ApplicationModule;
+import co.classplus.App;
+import co.classplus.data.DataManager;
+import co.classplus.di.ApplicationContext;
+import co.classplus.di.module.ApplicationModule;
 import dagger.Component;
 
 @Singleton

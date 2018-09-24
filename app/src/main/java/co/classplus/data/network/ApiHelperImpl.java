@@ -1,10 +1,8 @@
-package co.sn.data.network;
+package co.classplus.data.network;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import co.sn.data.model.ListingYoutubeItemModel;
-import co.sn.data.model.SearchYoutubeItemModel;
 import io.reactivex.Observable;
 
 @Singleton
