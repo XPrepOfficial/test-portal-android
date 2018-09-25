@@ -5,7 +5,7 @@ import com.google.gson.GsonBuilder;
 
 import java.util.concurrent.TimeUnit;
 
-import co.classplus.app.BuildConfig;
+import co.classplus.cms.BuildConfig;
 import co.classplus.data.network.retrofit.RxErrorHandlingCallAdapterFactory;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;

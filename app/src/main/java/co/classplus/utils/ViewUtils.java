@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
-import co.classplus.app.R;
+import co.classplus.cms.R;
 
 public final class ViewUtils {
 

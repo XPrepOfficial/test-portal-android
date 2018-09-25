@@ -20,7 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-import co.classplus.app.R;
+import co.classplus.cms.R;
 import rebus.permissionutils.PermissionEnum;
 
 public final class CommonUtils {

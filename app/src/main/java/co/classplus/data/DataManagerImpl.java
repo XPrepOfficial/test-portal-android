@@ -25,14 +25,4 @@ public class DataManagerImpl implements DataManager {
         mPreferencesHelper = preferencesHelper;
         mApiHelper = apiHelper;
     }
-
-    @Override
-    public Observable<ListingYoutubeItemModel> getMostPopularVideos(String pageToken, String apiKey) {
-        return mApiHelper.getMostPopularVideos(pageToken, apiKey);
-    }
-
-    @Override
-    public Observable<SearchYoutubeItemModel> getSearchVideos(String searchQuery, String pageToken, String apiKey) {
-        return mApiHelper.getSearchVideos(searchQuery, pageToken, apiKey);
-    }
 }

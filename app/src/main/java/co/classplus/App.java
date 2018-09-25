@@ -13,7 +13,6 @@ import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
 
 import javax.inject.Inject;
 
-import co.classplus.app.BuildConfig;
 import co.classplus.data.DataManager;
 import co.classplus.di.component.ApplicationComponent;
 import co.classplus.di.component.DaggerApplicationComponent;

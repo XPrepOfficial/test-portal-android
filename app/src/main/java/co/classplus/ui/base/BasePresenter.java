@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import javax.inject.Inject;
 
-import co.classplus.app.R;
+import co.classplus.cms.R;
 import co.classplus.data.DataManager;
 import co.classplus.data.network.retrofit.RetrofitException;
 import co.classplus.utils.CommonUtils;

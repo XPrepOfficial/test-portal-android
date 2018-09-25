@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 import butterknife.Unbinder;
 import co.classplus.App;
-import co.classplus.app.R;
+import co.classplus.cms.R;
 import co.classplus.di.component.ActivityComponent;
 import co.classplus.di.component.DaggerActivityComponent;
 import co.classplus.di.module.ActivityModule;
