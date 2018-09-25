@@ -6,11 +6,4 @@
     android:layout_gravity="center"
     android:background="@android:color/transparent">
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center"
-        app:lottie_autoPlay="true"
-        app:lottie_fileName="loading.json"
-        app:lottie_loop="true" />
 </RelativeLayout>
