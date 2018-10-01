@@ -1,13 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
 
+    <!-- material colors -->
+    <color name="colorPrimary">#009ae0</color>
+    <color name="colorPrimaryWithAlpha">#80009ae0</color>
+    <color name="colorPrimaryWith10Alpha">#16009ae0</color>
+    <color name="colorPrimaryDark">#0084C1</color>
+    <color name="colorPrimaryLight">#62cbff</color>
+    <color name="colorAccent">#009ae0</color>
     <color name="colorPrimaryText">#333333</color>
     <color name="colorSecondaryText">#7f7f7f</color>
+    <color name="colorSecondaryTextAlpha">#807f7f7f</color>
+    <color name="divider">#BDBDBD</color>
+
+    <!--
+        ######################################
+        for any colors refer to
+        http://www.color-hex.com/color-names.html
+        and also name the colors as same on the site for maintaining a standard
+        AND DO NOT ADD SIMILAR SHADES COLORS, RE-USE
+        #######################################
+    -->
 
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
+    <color name="gray79">#c9c9c9</color>
+    <color name="gray19">#303030</color>
     <color name="gray91">#e8e8e8</color>
+    <color name="gray89">#e3e3e3</color>
+    <color name="red3">#cd0000</color>
+    <color name="ForestGreen">#228b22</color>
+    <color name="orange1">#ffa500</color>
+    <color name="royalblue">#1e88f5</color>
+    <color name="fb">#3A5897</color>
+    <color name="bisque1">#ffe4c4</color>
+    <color name="chartreuse3">#66cd00</color>
+    <color name="tutor_pro">#FFDE48</color>
+
+    <color name="tutor_pro_light">#FFF3C1</color>
+    <color name="tutor_pro_light_text">#A28D39</color>
+    <color name="tutor_pro_light_alpha">#80FFF3C1</color>
+
+
+    <color name="link">#008DEA</color>
+    <color name="present_green">#34c176</color>
+    <color name="absent_red">#c13434</color>
+
 </resources>
