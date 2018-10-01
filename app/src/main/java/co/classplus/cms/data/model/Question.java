@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class Question implements Parcelable {
 
     private CmsNameId paragraph;
+    private String quesText;
     private boolean hasMultipleAnswer;
     private int positiveMarks;
     private int negativeMarks;
@@ -19,6 +20,14 @@ public class Question implements Parcelable {
 
     public void setParagraph(CmsNameId paragraph) {
         this.paragraph = paragraph;
+    }
+
+    public String getQuesText() {
+        return quesText;
+    }
+
+    public void setQuesText(String quesText) {
+        this.quesText = quesText;
     }
 
     public boolean isHasMultipleAnswer() {
@@ -55,6 +64,7 @@ public class Question implements Parcelable {
 
     protected Question(Parcel in) {
         paragraph = (CmsNameId) in.readValue(CmsNameId.class.getClassLoader());
+        quesText = in.readString();
         hasMultipleAnswer = in.readByte() != 0x00;
         positiveMarks = in.readInt();
         negativeMarks = in.readInt();
@@ -74,6 +84,7 @@ public class Question implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(paragraph);
+        dest.writeString(quesText);
         dest.writeByte((byte) (hasMultipleAnswer ? 0x01 : 0x00));
         dest.writeInt(positiveMarks);
         dest.writeInt(negativeMarks);
