@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Mvp App</string>
     <string name="api_default_error">Something wrong happened!</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
