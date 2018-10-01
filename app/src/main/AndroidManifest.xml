@@ -12,9 +12,11 @@
         <activity android:name=".ui.test.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.taketest.TestTakingActivity"></activity>
     </application>
 
 </manifest>
