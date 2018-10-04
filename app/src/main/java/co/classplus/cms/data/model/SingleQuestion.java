@@ -25,6 +25,14 @@ public class SingleQuestion extends Question implements Parcelable {
         isCorrect = correct;
     }
 
+    public Long getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Long duration) {
+        this.duration = duration;
+    }
+
     protected SingleQuestion(Parcel in) {
         super(in);
         isMarkedForReview = in.readByte() != 0x00;

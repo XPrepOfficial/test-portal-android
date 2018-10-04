@@ -74,6 +74,9 @@ dependencies {
     // logging
     implementation "com.jakewharton.timber:timber:$rootProject.ext.timberVersion"
 
-    //UIL
+    // UIL
     implementation files("libs/universal-image-loader-$rootProject.ext.uilVersion")
+
+    // HTML TextView
+    implementation "org.sufficientlysecure:html-textview:$rootProject.ext.htmlTextViewVersion"
 }
