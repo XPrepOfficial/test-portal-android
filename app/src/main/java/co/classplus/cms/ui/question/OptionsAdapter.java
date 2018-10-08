@@ -25,11 +25,18 @@ public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.OptionsV
     private boolean isViewingSolution;
     private ArrayList<QuestionOption> optionsList;
 
-    public OptionsAdapter(Context context, ArrayList<QuestionOption> options, boolean isViewingSolution) {
+    public OptionsAdapter(Context context, ArrayList<QuestionOption> options) {
         this.mContext = context;
         this.optionsList = options;
         inflater = LayoutInflater.from(context);
-        this.isViewingSolution = isViewingSolution;
+    }
+
+    public boolean isViewingSolution() {
+        return isViewingSolution;
+    }
+
+    public void setViewingSolution(boolean viewingSolution) {
+        isViewingSolution = viewingSolution;
     }
 
     void addOptions(ArrayList<QuestionOption> options) {
@@ -56,14 +63,25 @@ public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.OptionsV
 
         if (isViewingSolution) {
             if (option.getCorrect()) {
-                holder.ll_sol.setVisibility(View.VISIBLE);
+                holder.ll_option_root.setBackgroundResource(R.drawable.bg_round_filled_green);
+                holder.tv_option.setTextColor(ContextCompat.getColor(mContext, R.color.white));
+            } else {
+                if (option.getSelected()) {
+                    holder.ll_option_root.setBackgroundResource(R.drawable.bg_round_empty_red);
+                    holder.tv_option.setTextColor(ContextCompat.getColor(mContext, R.color.absent_red));
+                } else {
+                    holder.ll_option_root.setBackgroundResource(R.drawable.bg_round_empty_gray);
+                    holder.tv_option.setTextColor(ContextCompat.getColor(mContext, R.color.colorPrimaryText));
+                }
+            }
+        } else {
+            if (option.getSelected()) {
+                holder.ll_option_root.setBackgroundResource(R.drawable.bg_round_filled_blue);
+                holder.tv_option.setTextColor(ContextCompat.getColor(mContext, R.color.colorPrimaryText));
+            } else {
                 holder.ll_option_root.setBackgroundResource(R.drawable.bg_round_empty_gray);
                 holder.tv_option.setTextColor(ContextCompat.getColor(mContext, R.color.colorPrimaryText));
             }
-        } else {
-            holder.ll_sol.setVisibility(View.GONE);
-            holder.ll_option_root.setBackgroundResource(R.drawable.bg_round_empty_gray);
-            holder.tv_option.setTextColor(ContextCompat.getColor(mContext, R.color.colorPrimaryText));
         }
     }
 
@@ -92,6 +110,17 @@ public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.OptionsV
             ll_option_root = itemView;
             optionImageGetter = new HtmlHttpImageGetter(tv_option);
             solutionImageGetter = new HtmlHttpImageGetter(tv_sol);
+
+            ll_option_root.setOnClickListener(v -> {
+                if (getAdapterPosition() == RecyclerView.NO_POSITION) {
+                    return;
+                }
+                if (!isViewingSolution) {
+                    QuestionOption option = optionsList.get(getAdapterPosition());
+                    option.setSelected(!option.getSelected());
+                    notifyItemChanged(getAdapterPosition());
+                }
+            });
         }
     }
 }

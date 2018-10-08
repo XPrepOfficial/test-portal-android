@@ -7,7 +7,7 @@ public class SingleQuestion extends Question implements Parcelable {
 
     private boolean isMarkedForReview;
     private Boolean isCorrect; //specifically made not primitive
-    private Long duration;
+    private long duration;     // made non-primitive to be made 0 initially
 
     public boolean isMarkedForReview() {
         return isMarkedForReview;
@@ -25,11 +25,11 @@ public class SingleQuestion extends Question implements Parcelable {
         isCorrect = correct;
     }
 
-    public Long getDuration() {
+    public long getDuration() {
         return duration;
     }
 
-    public void setDuration(Long duration) {
+    public void setDuration(long duration) {
         this.duration = duration;
     }
 
@@ -38,7 +38,7 @@ public class SingleQuestion extends Question implements Parcelable {
         isMarkedForReview = in.readByte() != 0x00;
         byte isCorrectVal = in.readByte();
         isCorrect = isCorrectVal == 0x02 ? null : isCorrectVal != 0x00;
-        duration = in.readByte() == 0x00 ? null : in.readLong();
+        duration = in.readLong();
     }
 
     @Override
@@ -55,12 +55,7 @@ public class SingleQuestion extends Question implements Parcelable {
         } else {
             dest.writeByte((byte) (isCorrect ? 0x01 : 0x00));
         }
-        if (duration == null) {
-            dest.writeByte((byte) (0x00));
-        } else {
-            dest.writeByte((byte) (0x01));
-            dest.writeLong(duration);
-        }
+        dest.writeLong(duration);
     }
 
     @SuppressWarnings("unused")
