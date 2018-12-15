@@ -9,14 +9,21 @@
         android:name=".App"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.test.MainActivity">
+        <activity
+            android:name=".ui.test.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.taketest.TestTakingActivity"></activity>
+        <activity
+            android:name=".ui.taketest.TestTakingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.instructions.InstructionsActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

@@ -5,9 +5,11 @@ import android.content.Context;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import co.classplus.cms.data.model.test.TestInstructionsResponse;
 import co.classplus.cms.data.network.ApiHelper;
 import co.classplus.cms.data.prefs.PreferencesHelper;
 import co.classplus.cms.di.ApplicationContext;
+import io.reactivex.Observable;
 
 @Singleton
 public class DataManagerImpl implements DataManager {
@@ -23,5 +25,10 @@ public class DataManagerImpl implements DataManager {
         mContext = context;
         mPreferencesHelper = preferencesHelper;
         mApiHelper = apiHelper;
+    }
+
+    @Override
+    public Observable<TestInstructionsResponse> getTestInstructions(String testId) {
+        return mApiHelper.getTestInstructions(testId);
     }
 }

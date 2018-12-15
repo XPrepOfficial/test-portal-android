@@ -1,6 +1,11 @@
 package co.classplus.cms.ui.base;
 
+import android.os.Bundle;
+
+import java.net.SocketTimeoutException;
+
 import javax.inject.Inject;
+import javax.net.ssl.HttpsURLConnection;
 
 import co.classplus.cms.R;
 import co.classplus.cms.data.DataManager;
@@ -68,20 +73,50 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
     }
 
     @Override
-    public void handleError(RetrofitException error) {
+    public void handleError(RetrofitException error, Bundle bundle, String apiTag) {
         if (error == null) {
             getMvpView().onError(R.string.api_default_error);
             return;
         }
 
         if (error.getKind() == RetrofitException.Kind.HTTP) {
-            getMvpView().onError("Non-200 Error !!");
+            if (error.getErrorCode() == HttpsURLConnection.HTTP_UNAUTHORIZED && error.isTokenExpired()) {
+//                doRefreshTokenApiCall(bundle, apiTag);
+            } else {
+                if (error.getErrorMessage() != null) {
+                    getMvpView().onError(error.getErrorMessage());
+                } else {
+                    getMvpView().onError(R.string.some_error);
+                }
+            }
         } else if (error.getKind() == RetrofitException.Kind.NETWORK) {
-            getMvpView().onError("Internet Connectivity Error !!");
+            if (error.getCause() instanceof SocketTimeoutException) {
+                getMvpView().onError(R.string.connection_error);
+            } else {
+                getMvpView().onError(R.string.connection_error);
+            }
         } else {
-            getMvpView().onError("Unknown Error Occurred !!");
+            getMvpView().onError(R.string.some_error);
         }
     }
+
+//    @Override
+//    public void doRefreshTokenApiCall(Bundle bundle, String apiTag) {
+//        getMvpView().showLoading();
+//        getCompositeDisposable().add(getDataManager()
+//                .doRefreshTokenApiCall(getRefreshJson())
+//                .subscribeOn(getSchedulerProvider().io())
+//                .observeOn(getSchedulerProvider().ui())
+//                .subscribe(authTokenModel -> {
+//                    getDataManager().setAccessToken(authTokenModel.getAuthToken().getToken());
+//                    getDataManager().setTokenExpiryTime(authTokenModel.getAuthToken().getTokenExpiryTime());
+//                    onAuthTokenRefresh(bundle, apiTag);
+//                    getMvpView().hideLoading();
+//                }, throwable -> {
+//                    getMvpView().hideLoading();
+//                    setUserAsLoggedOut(true);
+//                }));
+//    }
 
     public static class MvpViewNotAttachedException extends RuntimeException {
         MvpViewNotAttachedException() {

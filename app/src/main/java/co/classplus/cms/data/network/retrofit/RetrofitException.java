@@ -1,5 +1,8 @@
 package co.classplus.cms.data.network.retrofit;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 
@@ -48,12 +51,48 @@ public class RetrofitException extends RuntimeException {
     private final Kind kind;
     private final Retrofit retrofit;
 
+    // Variables related to our server responses
+    private int errorCode;
+    private String errorMessage;
+    private boolean isTokenExpired;
+    private boolean isOtpInvalid;
+    private JSONObject errorJsonObject;
+
     private RetrofitException(String message, String url, Response response, Kind kind, Throwable exception, Retrofit retrofit) {
         super(message, exception);
         this.url = url;
         this.response = response;
         this.kind = kind;
         this.retrofit = retrofit;
+
+        if (response != null) {
+            try {
+                this.errorCode = response.code();
+                if (response.errorBody() != null) {
+                    String jsonStr = response.errorBody().string();
+                    this.errorJsonObject = new JSONObject(jsonStr);
+                    if (this.errorJsonObject.has("message")) {
+                        this.errorMessage = this.errorJsonObject.getString("message");
+                    }
+                    if (this.errorJsonObject.has("data")) {
+                        JSONArray array = new JSONArray(this.errorJsonObject.getString("data"));
+                        if (array.length() > 0) {
+                            JSONObject data = array.getJSONObject(0);
+                            if (data.has("tokenExpired")) {
+                                int tokenExpired = data.getInt("tokenExpired");
+                                this.isTokenExpired = tokenExpired == 1;
+                            }
+                            if (data.has("otpInvalid")) {
+                                int otpInvalid = data.getInt("otpInvalid");
+                                this.isOtpInvalid = otpInvalid == 1;
+                            }
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     /**
@@ -84,6 +123,40 @@ public class RetrofitException extends RuntimeException {
         return retrofit;
     }
 
+    /**
+     * The error code which was returned
+     */
+    public int getErrorCode() {
+        return errorCode;
+    }
+
+    /**
+     * The error message which was returned
+     */
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    /**
+     * For our server if token was expired or not
+     */
+    public boolean isTokenExpired() {
+        return isTokenExpired;
+    }
+
+    /**
+     * For our server if invalid otp was sent
+     */
+    public boolean isOtpInvalid() {
+        return isOtpInvalid;
+    }
+
+    /**
+     * The JSONObject for error body which is returned
+     */
+    public JSONObject getErrorJsonObject() {
+        return errorJsonObject;
+    }
 
     /**
      * HTTP response body converted to specified {@code type}. {@code null} if there is no

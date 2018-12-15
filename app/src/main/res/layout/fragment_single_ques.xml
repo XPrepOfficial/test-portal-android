@@ -116,7 +116,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/colorPrimaryText"
             android:textSize="18sp"
-            tools:text="Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor" />
+            tools:text="@string/long_test_text" />
 
         <TextView
             android:layout_width="wrap_content"

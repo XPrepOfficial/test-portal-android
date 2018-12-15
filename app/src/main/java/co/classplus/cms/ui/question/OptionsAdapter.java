@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import co.classplus.cms.R;
-import co.classplus.cms.data.model.QuestionOption;
+import co.classplus.cms.data.model.question.QuestionOption;
 
 public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.OptionsViewHolder> {
 

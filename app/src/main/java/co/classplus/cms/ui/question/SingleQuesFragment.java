@@ -21,7 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import co.classplus.cms.R;
-import co.classplus.cms.data.model.SingleQuestion;
+import co.classplus.cms.data.model.question.SingleQuestion;
 import co.classplus.cms.ui.base.BaseFragment;
 import co.classplus.cms.utils.StringUtils;
 

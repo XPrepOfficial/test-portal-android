@@ -1,18 +1,31 @@
-package co.classplus.cms.data.model;
+package co.classplus.cms.data.model.question;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
+
+import co.classplus.cms.data.model.ParagraphModel;
 
 public class Question implements Parcelable {
 
+    @Expose
+    @SerializedName("_id")
     private String _id;
-    private CmsNameId paragraph;
+    @Expose
+    @SerializedName("paragraph")
+    private ParagraphModel paragraph;
     private String quesText;
+    @Expose
+    @SerializedName("hasMultipleAnswers")
     private boolean hasMultipleAnswer;
     private int positiveMarks;
     private int negativeMarks;
+    @Expose
+    @SerializedName("options")
     private ArrayList<QuestionOption> options;
 
     public Question() {
@@ -26,11 +39,11 @@ public class Question implements Parcelable {
         this._id = _id;
     }
 
-    public CmsNameId getParagraph() {
+    public ParagraphModel getParagraph() {
         return paragraph;
     }
 
-    public void setParagraph(CmsNameId paragraph) {
+    public void setParagraph(ParagraphModel paragraph) {
         this.paragraph = paragraph;
     }
 
@@ -76,14 +89,14 @@ public class Question implements Parcelable {
 
     protected Question(Parcel in) {
         _id = in.readString();
-        paragraph = (CmsNameId) in.readValue(CmsNameId.class.getClassLoader());
+        paragraph = (ParagraphModel) in.readValue(ParagraphModel.class.getClassLoader());
         quesText = in.readString();
         hasMultipleAnswer = in.readByte() != 0x00;
         positiveMarks = in.readInt();
         negativeMarks = in.readInt();
         if (in.readByte() == 0x01) {
             options = new ArrayList<>();
-            in.readList(options, CmsNameId.class.getClassLoader());
+            in.readList(options, QuestionOption.class.getClassLoader());
         } else {
             options = null;
         }

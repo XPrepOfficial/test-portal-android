@@ -1,11 +1,18 @@
-package co.classplus.cms.data.model;
+package co.classplus.cms.data.model.base;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class CmsNameId implements Parcelable {
 
+    @Expose
+    @SerializedName("_id")
     private String _id;
+    @Expose
+    @SerializedName("name")
     private String name;
 
     public String get_id() {

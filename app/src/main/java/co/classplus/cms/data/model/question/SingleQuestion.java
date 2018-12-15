@@ -1,4 +1,4 @@
-package co.classplus.cms.data.model;
+package co.classplus.cms.data.model.question;
 
 import android.os.Parcel;
 import android.os.Parcelable;

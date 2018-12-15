@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import co.classplus.cms.R;
-import co.classplus.cms.data.model.SingleQuestion;
+import co.classplus.cms.data.model.question.SingleQuestion;
 import co.classplus.cms.ui.base.BaseViewHolder;
 
 public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.QuestionViewHolder> {
