@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorPrimaryText"
                 android:textSize="18sp"
-                tools:text="Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor" />
+                tools:text="@string/long_test_text" />
 
             <View
                 android:layout_width="match_parent"

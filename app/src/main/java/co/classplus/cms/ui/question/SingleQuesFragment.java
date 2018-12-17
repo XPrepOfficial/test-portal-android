@@ -122,7 +122,7 @@ public class SingleQuesFragment extends BaseFragment implements SingleQuesView {
             ll_paragraph.setVisibility(View.GONE);
         } else {
             ll_paragraph.setVisibility(View.VISIBLE);
-            tv_paragraph.setHtml(singleQuestion.getParagraph().getName(), new HtmlHttpImageGetter(tv_paragraph));
+            tv_paragraph.setHtml(singleQuestion.getParagraph().getDescription(), new HtmlHttpImageGetter(tv_paragraph));
         }
 
         tv_ques_text.setHtml(singleQuestion.getQuesText(), new HtmlHttpImageGetter(tv_ques_text));

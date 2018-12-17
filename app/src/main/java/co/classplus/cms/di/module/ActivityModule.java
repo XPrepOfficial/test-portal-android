@@ -8,9 +8,15 @@ import co.classplus.cms.di.PerActivity;
 import co.classplus.cms.ui.base.BasePresenter;
 import co.classplus.cms.ui.base.MvpPresenter;
 import co.classplus.cms.ui.base.MvpView;
+import co.classplus.cms.ui.instructions.InstructionsPresenter;
+import co.classplus.cms.ui.instructions.InstructionsPresenterImpl;
+import co.classplus.cms.ui.instructions.InstructionsView;
 import co.classplus.cms.ui.question.SingleQuesPresenter;
 import co.classplus.cms.ui.question.SingleQuesPresenterImpl;
 import co.classplus.cms.ui.question.SingleQuesView;
+import co.classplus.cms.ui.taketest.TestTakingPresenter;
+import co.classplus.cms.ui.taketest.TestTakingPresenterImpl;
+import co.classplus.cms.ui.taketest.TestTakingView;
 import co.classplus.cms.utils.rx.SchedulerProvider;
 import co.classplus.cms.utils.rx.SchedulerProviderImpl;
 import dagger.Module;
@@ -58,6 +64,20 @@ public class ActivityModule {
     @PerActivity
     SingleQuesPresenter<SingleQuesView> provideSingleQuesPresenter(
             SingleQuesPresenterImpl<SingleQuesView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    InstructionsPresenter<InstructionsView> provideInstructionsPresenter(
+            InstructionsPresenterImpl<InstructionsView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    TestTakingPresenter<TestTakingView> provideTestTakingPresenter(
+            TestTakingPresenterImpl<TestTakingView> presenter) {
         return presenter;
     }
 }

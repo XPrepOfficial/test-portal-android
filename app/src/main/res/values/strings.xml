@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Mvp App</string>
-    <string name="api_default_error">Something wrong happened!</string>
     <string name="long_test_text">Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor</string>
 
     <!-- network errors-->

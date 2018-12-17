@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-import co.classplus.cms.data.model.ParagraphModel;
+import co.classplus.cms.data.model.test.ParagraphModel;
 
 public class Question implements Parcelable {
 
@@ -18,6 +18,8 @@ public class Question implements Parcelable {
     @Expose
     @SerializedName("paragraph")
     private ParagraphModel paragraph;
+    @Expose
+    @SerializedName("name")
     private String quesText;
     @Expose
     @SerializedName("hasMultipleAnswers")

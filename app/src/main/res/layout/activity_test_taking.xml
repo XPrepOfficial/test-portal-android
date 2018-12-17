@@ -8,6 +8,7 @@
     tools:context=".ui.taketest.TestTakingActivity">
 
     <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
@@ -23,12 +24,16 @@
             android:layout_height="match_parent">
 
             <LinearLayout
+                android:id="@+id/ll_timer"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
+                android:layout_toLeftOf="@id/ll_section"
+                android:layout_toStartOf="@id/ll_section"
                 android:gravity="start|center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                tools:ignore="UseCompoundDrawables">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -37,9 +42,11 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="5dp"
                     android:layout_marginStart="10dp"
-                    android:src="@drawable/ic_timer" />
+                    android:src="@drawable/ic_timer"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
+                    android:id="@+id/tv_timer"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
@@ -50,14 +57,17 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_section"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:gravity="end|center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                tools:ignore="UseCompoundDrawables">
 
                 <TextView
+                    android:id="@+id/tv_section"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
@@ -73,7 +83,8 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginStart="5dp"
-                    android:src="@drawable/ic_chevron_down" />
+                    android:src="@drawable/ic_chevron_down"
+                    tools:ignore="ContentDescription" />
             </LinearLayout>
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
@@ -84,6 +95,7 @@
         android:layout_height="wrap_content" />
 
     <FrameLayout
+        android:id="@+id/frame_ques_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
@@ -98,6 +110,7 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
+            android:id="@+id/ll_prev"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -109,13 +122,15 @@
             android:paddingLeft="5dp"
             android:paddingRight="15dp"
             android:paddingStart="5dp"
-            android:paddingTop="15dp">
+            android:paddingTop="15dp"
+            tools:ignore="UseCompoundDrawables">
 
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/ic_chevron_left"
-                android:tint="@color/colorPrimary" />
+                android:tint="@color/colorPrimary"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -128,6 +143,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -139,7 +155,9 @@
             android:paddingLeft="15dp"
             android:paddingRight="5dp"
             android:paddingStart="15dp"
-            android:paddingTop="15dp">
+            android:paddingTop="15dp"
+            android:visibility="visible"
+            tools:ignore="UseCompoundDrawables">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -154,7 +172,31 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/ic_chevron_right"
-                android:tint="@color/colorPrimary" />
+                android:tint="@color/colorPrimary"
+                tools:ignore="ContentDescription" />
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/bg_round_empty_primary"
+            android:gravity="center"
+            android:paddingBottom="10dp"
+            android:paddingEnd="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingStart="10dp"
+            android:paddingTop="10dp"
+            android:text="Submit Test"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp"
+            android:visibility="gone" />
+
     </RelativeLayout>
 </LinearLayout>

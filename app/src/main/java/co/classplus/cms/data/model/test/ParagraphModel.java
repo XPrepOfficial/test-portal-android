@@ -1,12 +1,10 @@
-package co.classplus.cms.data.model;
+package co.classplus.cms.data.model.test;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
-import co.classplus.cms.data.model.base.CmsNameId;
 
 public class ParagraphModel implements Parcelable {
 
@@ -50,15 +48,15 @@ public class ParagraphModel implements Parcelable {
     }
 
     @SuppressWarnings("unused")
-    public static final Parcelable.Creator<CmsNameId> CREATOR = new Parcelable.Creator<CmsNameId>() {
+    public static final Parcelable.Creator<ParagraphModel> CREATOR = new Parcelable.Creator<ParagraphModel>() {
         @Override
-        public CmsNameId createFromParcel(Parcel in) {
-            return new CmsNameId(in);
+        public ParagraphModel createFromParcel(Parcel in) {
+            return new ParagraphModel(in);
         }
 
         @Override
-        public CmsNameId[] newArray(int size) {
-            return new CmsNameId[size];
+        public ParagraphModel[] newArray(int size) {
+            return new ParagraphModel[size];
         }
     };
 }

@@ -59,6 +59,7 @@ public class InstructionsActivity extends BaseActivity implements InstructionsVi
 
     private void setupUi() {
         setupToolbar();
+        presenter.fetchTestInstructions("5c13882cc3628776a4023b1e");
     }
 
     @Override
