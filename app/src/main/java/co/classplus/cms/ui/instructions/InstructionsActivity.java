@@ -1,6 +1,7 @@
 package co.classplus.cms.ui.instructions;
 
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Button;
@@ -16,6 +17,7 @@ import butterknife.OnClick;
 import co.classplus.cms.R;
 import co.classplus.cms.data.model.test.TestInstructions;
 import co.classplus.cms.ui.base.BaseActivity;
+import co.classplus.cms.utils.StringUtils;
 
 public class InstructionsActivity extends BaseActivity implements InstructionsView {
 
@@ -31,6 +33,10 @@ public class InstructionsActivity extends BaseActivity implements InstructionsVi
     TextView tv_instructions;
     @BindView(R.id.btn_attempt_test)
     Button btn_attempt_test;
+    @BindView(R.id.tv_sections_label)
+    TextView tv_sections_label;
+    @BindView(R.id.rv_sections)
+    RecyclerView rv_sections;
 
     @Inject
     InstructionsPresenter<InstructionsView> presenter;
@@ -88,7 +94,7 @@ public class InstructionsActivity extends BaseActivity implements InstructionsVi
     public void onTestInstructionsFetched(TestInstructions testInstructions) {
         tv_test_name.setText(testInstructions.getName());
         tv_num_ques.setText(String.format(Locale.ENGLISH, "%d Questions", testInstructions.getTotalNumberOfQuestions()));
-        tv_test_duration.setText(String.format(Locale.ENGLISH, "%d Mins", testInstructions.getDuration()));
+        tv_test_duration.setText(String.format(Locale.ENGLISH, "%s Mins", StringUtils.getDurationFromMillis(testInstructions.getDuration())));
         tv_instructions.setText(testInstructions.getInstructions());
     }
 }

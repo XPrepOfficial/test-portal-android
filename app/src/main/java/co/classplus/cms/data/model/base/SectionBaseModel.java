@@ -9,6 +9,9 @@ import com.google.gson.annotations.SerializedName;
 public class SectionBaseModel extends CmsNameId implements Comparable<SectionBaseModel> {
 
     @Expose
+    @SerializedName("numberOfQuestions")
+    private int numberOfQuestions;
+    @Expose
     @SerializedName("order")
     private int order;
     @Expose
@@ -20,6 +23,14 @@ public class SectionBaseModel extends CmsNameId implements Comparable<SectionBas
 
     protected SectionBaseModel(Parcel in) {
         super(in);
+    }
+
+    public int getNumberOfQuestions() {
+        return numberOfQuestions;
+    }
+
+    public void setNumberOfQuestions(int numberOfQuestions) {
+        this.numberOfQuestions = numberOfQuestions;
     }
 
     public int getOrder() {

@@ -84,13 +84,23 @@ public class SingleQuesFragment extends BaseFragment implements SingleQuesView {
     }
 
     public void replaceQuestion(SingleQuestion newQuestion) {
-        if (this.singleQuestion != null) {
-            stopTimer();
-        }
+        stopTimer();
         this.singleQuestion = newQuestion;
         isViewingSolution = singleQuestion.getCorrect() != null;
         optionsAdapter.setViewingSolution(isViewingSolution);
         updateUi();
+        startTimer();
+    }
+
+    @Override
+    public void onPause() {
+        stopTimer();
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         startTimer();
     }
 
