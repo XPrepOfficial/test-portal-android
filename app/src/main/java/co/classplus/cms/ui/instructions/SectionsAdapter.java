@@ -9,23 +9,55 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.github.siyamed.shapeimageview.CircularImageView;
+
 import java.util.ArrayList;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import co.classplus.cms.R;
 import co.classplus.cms.data.model.base.SectionBaseModel;
+import co.classplus.cms.utils.ViewUtils;
 
 public class SectionsAdapter extends RecyclerView.Adapter<SectionsAdapter.ViewHolder> {
 
-    private Context mContext;
+    private int selectedIndex;
     private LayoutInflater inflater;
+    private boolean isSelectionEnabled;
+    private SectionsListener sectionsListener;
     private ArrayList<SectionBaseModel> sectionsList;
 
-    public SectionsAdapter(Context context, ArrayList<SectionBaseModel> sectionsList) {
-        mContext = context;
+    public SectionsAdapter(Context context, ArrayList<SectionBaseModel> sectionsList, boolean isSelectionEnabled) {
         this.sectionsList = sectionsList;
         inflater = LayoutInflater.from(context);
+        this.isSelectionEnabled = isSelectionEnabled;
+    }
+
+    public void clearSections() {
+        this.sectionsList.clear();
+        notifyDataSetChanged();
+    }
+
+    public void addSections(ArrayList<SectionBaseModel> sections) {
+        this.sectionsList.addAll(sections);
+        notifyDataSetChanged();
+    }
+
+    public ArrayList<SectionBaseModel> getSectionsList() {
+        return sectionsList;
+    }
+
+    public int getSelectedIndex() {
+        return selectedIndex;
+    }
+
+    public void setSelectedIndex(int selectedIndex) {
+        this.selectedIndex = selectedIndex;
+    }
+
+    public void setSectionsListener(SectionsListener sectionsListener) {
+        this.sectionsListener = sectionsListener;
     }
 
     @NonNull
@@ -37,6 +69,16 @@ public class SectionsAdapter extends RecyclerView.Adapter<SectionsAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         SectionBaseModel section = sectionsList.get(position);
+        ViewUtils.setCircleImageWithDrawable(holder.iv_index, null, String.valueOf(position + 1));
+        holder.tv_section_name.setText(section.getName());
+        holder.tv_num_ques.setText(String.format(Locale.ENGLISH, "%d Questions", section.getNumberOfQuestions()));
+        if (isSelectionEnabled) {
+            if (position == selectedIndex) {
+                holder.iv_selected.setVisibility(View.VISIBLE);
+            } else {
+                holder.iv_selected.setVisibility(View.GONE);
+            }
+        }
     }
 
     @Override
@@ -46,8 +88,8 @@ public class SectionsAdapter extends RecyclerView.Adapter<SectionsAdapter.ViewHo
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.tv_index)
-        TextView tv_index;
+        @BindView(R.id.iv_index)
+        CircularImageView iv_index;
         @BindView(R.id.tv_section_name)
         TextView tv_section_name;
         @BindView(R.id.tv_num_ques)
@@ -58,6 +100,21 @@ public class SectionsAdapter extends RecyclerView.Adapter<SectionsAdapter.ViewHo
         ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+
+            itemView.setOnClickListener(v -> {
+                if (isSelectionEnabled && getAdapterPosition() != RecyclerView.NO_POSITION) {
+                    selectedIndex = getAdapterPosition();
+                    if (sectionsListener != null) {
+                        sectionsListener.onSectionSelected(sectionsList.get(getAdapterPosition()));
+                    }
+                    notifyDataSetChanged();
+                }
+            });
         }
+    }
+
+    public interface SectionsListener {
+
+        void onSectionSelected(SectionBaseModel sectionBaseModel);
     }
 }

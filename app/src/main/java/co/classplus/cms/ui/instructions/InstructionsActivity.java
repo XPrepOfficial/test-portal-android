@@ -1,12 +1,17 @@
 package co.classplus.cms.ui.instructions;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.ViewCompat;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 import javax.inject.Inject;
@@ -17,6 +22,7 @@ import butterknife.OnClick;
 import co.classplus.cms.R;
 import co.classplus.cms.data.model.test.TestInstructions;
 import co.classplus.cms.ui.base.BaseActivity;
+import co.classplus.cms.ui.taketest.TestTakingActivity;
 import co.classplus.cms.utils.StringUtils;
 
 public class InstructionsActivity extends BaseActivity implements InstructionsView {
@@ -40,6 +46,8 @@ public class InstructionsActivity extends BaseActivity implements InstructionsVi
 
     @Inject
     InstructionsPresenter<InstructionsView> presenter;
+
+    private SectionsAdapter sectionsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +73,11 @@ public class InstructionsActivity extends BaseActivity implements InstructionsVi
 
     private void setupUi() {
         setupToolbar();
-        presenter.fetchTestInstructions("5c13882cc3628776a4023b1e");
+        sectionsAdapter = new SectionsAdapter(this, new ArrayList<>(), false);
+        rv_sections.setAdapter(sectionsAdapter);
+        rv_sections.setLayoutManager(new LinearLayoutManager(this));
+        ViewCompat.setNestedScrollingEnabled(rv_sections, false);
+        presenter.fetchTestInstructions("5c192fb04c70a80b57d1221d");
     }
 
     @Override
@@ -79,7 +91,8 @@ public class InstructionsActivity extends BaseActivity implements InstructionsVi
 
     @OnClick(R.id.btn_attempt_test)
     public void onAttemptTestClicked() {
-        //todo do something on button click
+        startActivity(new Intent(this, TestTakingActivity.class));
+        finish();
     }
 
     @Override
@@ -96,5 +109,12 @@ public class InstructionsActivity extends BaseActivity implements InstructionsVi
         tv_num_ques.setText(String.format(Locale.ENGLISH, "%d Questions", testInstructions.getTotalNumberOfQuestions()));
         tv_test_duration.setText(String.format(Locale.ENGLISH, "%s Mins", StringUtils.getDurationFromMillis(testInstructions.getDuration())));
         tv_instructions.setText(testInstructions.getInstructions());
+        if (testInstructions.getSections().size() < 2) {
+            tv_sections_label.setVisibility(View.GONE);
+        } else {
+            tv_sections_label.setVisibility(View.VISIBLE);
+            sectionsAdapter.clearSections();
+            sectionsAdapter.addSections(testInstructions.getSections());
+        }
     }
 }

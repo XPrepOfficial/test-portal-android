@@ -81,4 +81,10 @@ dependencies {
 
     // HTML TextView
     implementation "org.sufficientlysecure:html-textview:$rootProject.ext.htmlTextViewVersion"
+
+    //CircleImageView
+    implementation 'com.github.siyamed:android-shape-imageview:0.9.3@aar'
+
+    // Text drawable
+    implementation 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
 }

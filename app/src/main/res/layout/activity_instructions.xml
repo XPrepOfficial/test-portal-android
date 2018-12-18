@@ -73,7 +73,7 @@
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@drawable/ic_timer"
+                    android:src="@drawable/ic_question"
                     android:tint="@color/colorPrimaryText"
                     tools:ignore="ContentDescription" />
 
@@ -93,7 +93,7 @@
                     android:layout_height="20dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginStart="20dp"
-                    android:src="@drawable/ic_timer"
+                    android:src="@drawable/ic_time"
                     android:tint="@color/colorPrimaryText"
                     tools:ignore="ContentDescription" />
 

@@ -14,7 +14,7 @@ public class QuestionOption extends CmsNameId implements Parcelable {
     @SerializedName("order")
     private int order;
     private Boolean isCorrect;
-    private Boolean isSelected;
+    private boolean isSelected;
     private String solution;
 
     public int getOrder() {
@@ -33,11 +33,11 @@ public class QuestionOption extends CmsNameId implements Parcelable {
         isCorrect = correct;
     }
 
-    public Boolean getSelected() {
+    public boolean getSelected() {
         return isSelected;
     }
 
-    public void setSelected(Boolean selected) {
+    public void setSelected(boolean selected) {
         isSelected = selected;
     }
 
@@ -54,8 +54,7 @@ public class QuestionOption extends CmsNameId implements Parcelable {
         order = in.readInt();
         byte isCorrectVal = in.readByte();
         isCorrect = isCorrectVal == 0x02 ? null : isCorrectVal != 0x00;
-        byte isSelectedVal = in.readByte();
-        isSelected = isSelectedVal == 0x02 ? null : isSelectedVal != 0x00;
+        isSelected = in.readByte() != 0x00;
         solution = in.readString();
     }
 
@@ -73,11 +72,7 @@ public class QuestionOption extends CmsNameId implements Parcelable {
         } else {
             dest.writeByte((byte) (isCorrect ? 0x01 : 0x00));
         }
-        if (isSelected == null) {
-            dest.writeByte((byte) (0x02));
-        } else {
-            dest.writeByte((byte) (isSelected ? 0x01 : 0x00));
-        }
+        dest.writeByte((byte) (isSelected ? 0x01 : 0x00));
         dest.writeString(solution);
     }
 

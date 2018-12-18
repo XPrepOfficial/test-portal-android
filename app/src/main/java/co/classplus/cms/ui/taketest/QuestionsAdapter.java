@@ -22,13 +22,60 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.Ques
 
     private Context context;
     private int offset;
-    private ArrayList<SingleQuestion> questions;
+    private int selectedIndex;
     private String selectedQuestionId = "1234a";
+    private ArrayList<SingleQuestion> questions;
+    private QuestionsListener questionsListener;
 
-    public QuestionsAdapter(Context context, int offset, ArrayList<SingleQuestion> questions) {
+    public QuestionsAdapter(Context context, int offset, ArrayList<SingleQuestion> questions, QuestionsListener questionsListener) {
         this.context = context;
         this.offset = offset;
         this.questions = questions;
+        this.questionsListener = questionsListener;
+    }
+
+    void clearQuestions() {
+        this.questions.clear();
+        notifyDataSetChanged();
+    }
+
+    void addQuestions(ArrayList<SingleQuestion> questions) {
+        this.questions.addAll(questions);
+        notifyDataSetChanged();
+    }
+
+    public int getSelectedIndex() {
+        return selectedIndex;
+    }
+
+    public String getSelectedQuestionId() {
+        return selectedQuestionId;
+    }
+
+    public void setSelectedQuestionId(String selectedQuestionId) {
+        this.selectedQuestionId = selectedQuestionId;
+    }
+
+    public void setSelectedIndex(int selectedIndex) {
+        this.selectedIndex = selectedIndex;
+    }
+
+    public void onPrevClicked() {
+        if (selectedIndex > 0) {
+            selectedIndex -= 1;
+            selectedQuestionId = questions.get(selectedIndex).get_id();
+            questionsListener.onQuestionSelected(questions.get(selectedIndex));
+            notifyDataSetChanged();
+        }
+    }
+
+    public void onNextClicked() {
+        if (selectedIndex < getItemCount() - 1) {
+            selectedIndex += 1;
+            selectedQuestionId = questions.get(selectedIndex).get_id();
+            questionsListener.onQuestionSelected(questions.get(selectedIndex));
+            notifyDataSetChanged();
+        }
     }
 
     @NonNull
@@ -82,6 +129,17 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.Ques
 
         @Override
         public void onClick(View v) {
+            if (getAdapterPosition() != RecyclerView.NO_POSITION) {
+                selectedIndex = getAdapterPosition();
+                selectedQuestionId = questions.get(getAdapterPosition()).get_id();
+                questionsListener.onQuestionSelected(questions.get(getAdapterPosition()));
+                notifyDataSetChanged();
+            }
         }
+    }
+
+    interface QuestionsListener {
+
+        void onQuestionSelected(SingleQuestion singleQuestion);
     }
 }

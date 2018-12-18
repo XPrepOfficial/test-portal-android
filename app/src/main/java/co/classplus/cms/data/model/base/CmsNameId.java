@@ -15,6 +15,9 @@ public class CmsNameId implements Parcelable {
     @SerializedName("name")
     private String name;
 
+    public CmsNameId() {
+    }
+
     public String get_id() {
         return _id;
     }

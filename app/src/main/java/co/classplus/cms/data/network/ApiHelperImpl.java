@@ -3,6 +3,7 @@ package co.classplus.cms.data.network;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import co.classplus.cms.data.model.test.TestGetResponse;
 import co.classplus.cms.data.model.test.TestInstructionsResponse;
 import io.reactivex.Observable;
 
@@ -18,5 +19,12 @@ public class ApiHelperImpl implements ApiHelper {
         return NetworkSingleton.getInstance()
                 .getNetworkClient()
                 .create(ApiHelper.class).getTestInstructions(testId);
+    }
+
+    @Override
+    public Observable<TestGetResponse> getTestDetails(String testId) {
+        return NetworkSingleton.getInstance()
+                .getNetworkClient()
+                .create(ApiHelper.class).getTestDetails(testId);
     }
 }

@@ -5,6 +5,7 @@ import android.content.Context;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import co.classplus.cms.data.model.test.TestGetResponse;
 import co.classplus.cms.data.model.test.TestInstructionsResponse;
 import co.classplus.cms.data.network.ApiHelper;
 import co.classplus.cms.data.prefs.PreferencesHelper;
@@ -30,5 +31,10 @@ public class DataManagerImpl implements DataManager {
     @Override
     public Observable<TestInstructionsResponse> getTestInstructions(String testId) {
         return mApiHelper.getTestInstructions(testId);
+    }
+
+    @Override
+    public Observable<TestGetResponse> getTestDetails(String testId) {
+        return mApiHelper.getTestDetails(testId);
     }
 }

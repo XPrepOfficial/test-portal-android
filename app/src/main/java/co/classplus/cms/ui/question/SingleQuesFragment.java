@@ -28,6 +28,7 @@ import co.classplus.cms.utils.StringUtils;
 public class SingleQuesFragment extends BaseFragment implements SingleQuesView {
 
     public static final String PARAM_QUES = "PARAM_QUES";
+    public static final String TAG = "SingleQuesFragment";
 
     @BindView(R.id.ll_paragraph)
     View ll_paragraph;
@@ -53,6 +54,7 @@ public class SingleQuesFragment extends BaseFragment implements SingleQuesView {
     private SingleQuestion singleQuestion;
     private OptionsAdapter optionsAdapter;
     private long startTime, endTime;
+    private SingleQuestionListener singleQuestionListener;
 
     public static SingleQuesFragment newInstance() {
         Bundle args = new Bundle();
@@ -81,6 +83,10 @@ public class SingleQuesFragment extends BaseFragment implements SingleQuesView {
         optionsAdapter = new OptionsAdapter(getContext(), new ArrayList<>());
         rv_options.setLayoutManager(new LinearLayoutManager(getContext()));
         rv_options.setAdapter(optionsAdapter);
+    }
+
+    public void setSingleQuestionListener(SingleQuestionListener singleQuestionListener) {
+        this.singleQuestionListener = singleQuestionListener;
     }
 
     public void replaceQuestion(SingleQuestion newQuestion) {
@@ -144,6 +150,9 @@ public class SingleQuesFragment extends BaseFragment implements SingleQuesView {
     public void onReviewClicked() {
         if (this.singleQuestion != null) {
             singleQuestion.setMarkedForReview(!singleQuestion.isMarkedForReview());
+            if (singleQuestionListener != null) {
+                singleQuestionListener.onMarkForReviewChange();
+            }
             updateReviewState();
         }
     }
@@ -169,5 +178,10 @@ public class SingleQuesFragment extends BaseFragment implements SingleQuesView {
     @Override
     public void onDestroy() {
         super.onDestroy();
+    }
+
+    public interface SingleQuestionListener {
+
+        void onMarkForReviewChange();
     }
 }

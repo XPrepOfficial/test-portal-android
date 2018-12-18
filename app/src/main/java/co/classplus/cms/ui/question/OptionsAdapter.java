@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import co.classplus.cms.R;
 import co.classplus.cms.data.model.question.QuestionOption;
 
@@ -58,7 +59,7 @@ public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.OptionsV
     @Override
     public void onBindViewHolder(@NonNull OptionsViewHolder holder, int position) {
         QuestionOption option = optionsList.get(position);
-        String optionHtml = "<p>" + position + 1 + "</p>" + option.getName();
+        String optionHtml = "<span style=\"display: inline;\">" + String.valueOf(position + 1) + option.getName() + "</span>";
         holder.tv_option.setHtml(optionHtml, holder.optionImageGetter);
 
         if (isViewingSolution) {
@@ -98,7 +99,7 @@ public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.OptionsV
         View ll_sol;
         @BindView(R.id.tv_sol)
         HtmlTextView tv_sol;
-
+        @BindView(R.id.ll_option_root)
         View ll_option_root;
 
         HtmlHttpImageGetter optionImageGetter;
@@ -107,20 +108,20 @@ public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.OptionsV
         OptionsViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            ll_option_root = itemView;
             optionImageGetter = new HtmlHttpImageGetter(tv_option);
             solutionImageGetter = new HtmlHttpImageGetter(tv_sol);
+        }
 
-            ll_option_root.setOnClickListener(v -> {
-                if (getAdapterPosition() == RecyclerView.NO_POSITION) {
-                    return;
-                }
-                if (!isViewingSolution) {
-                    QuestionOption option = optionsList.get(getAdapterPosition());
-                    option.setSelected(!option.getSelected());
-                    notifyItemChanged(getAdapterPosition());
-                }
-            });
+        @OnClick({R.id.ll_option_root, R.id.tv_option})
+        public void onRootViewClicked() {
+            if (getAdapterPosition() == RecyclerView.NO_POSITION) {
+                return;
+            }
+            if (!isViewingSolution) {
+                QuestionOption option = optionsList.get(getAdapterPosition());
+                option.setSelected(!option.getSelected());
+                notifyDataSetChanged();
+            }
         }
     }
 }

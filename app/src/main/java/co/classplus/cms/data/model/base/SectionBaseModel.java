@@ -6,6 +6,8 @@ import android.support.annotation.NonNull;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import co.classplus.cms.data.model.test.TestSection;
+
 public class SectionBaseModel extends CmsNameId implements Comparable<SectionBaseModel> {
 
     @Expose
@@ -20,6 +22,18 @@ public class SectionBaseModel extends CmsNameId implements Comparable<SectionBas
     @Expose
     @SerializedName("updatedAt")
     private String updatedAt;
+
+    public SectionBaseModel() {
+    }
+
+    public SectionBaseModel(TestSection testSection) {
+        this.set_id(testSection.get_id());
+        this.setName(testSection.getName());
+        this.numberOfQuestions = testSection.getNumberOfQuestions();
+        this.order = testSection.getOrder();
+        this.createdAt = testSection.getCreatedAt();
+        this.updatedAt = testSection.getUpdatedAt();
+    }
 
     protected SectionBaseModel(Parcel in) {
         super(in);
