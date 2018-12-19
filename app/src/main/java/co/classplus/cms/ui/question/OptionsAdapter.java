@@ -18,18 +18,28 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import co.classplus.cms.R;
 import co.classplus.cms.data.model.question.QuestionOption;
+import co.classplus.cms.data.model.question.SingleQuestion;
 
 public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.OptionsViewHolder> {
 
     private Context mContext;
     private LayoutInflater inflater;
     private boolean isViewingSolution;
+    private SingleQuestion singleQuestion;
     private ArrayList<QuestionOption> optionsList;
 
     public OptionsAdapter(Context context, ArrayList<QuestionOption> options) {
         this.mContext = context;
         this.optionsList = options;
         inflater = LayoutInflater.from(context);
+    }
+
+    public SingleQuestion getSingleQuestion() {
+        return singleQuestion;
+    }
+
+    public void setSingleQuestion(SingleQuestion singleQuestion) {
+        this.singleQuestion = singleQuestion;
     }
 
     public boolean isViewingSolution() {
@@ -108,8 +118,8 @@ public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.OptionsV
         OptionsViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            optionImageGetter = new HtmlHttpImageGetter(tv_option);
-            solutionImageGetter = new HtmlHttpImageGetter(tv_sol);
+            optionImageGetter = new HtmlHttpImageGetter(tv_option, null, true);
+            solutionImageGetter = new HtmlHttpImageGetter(tv_sol, null, true);
         }
 
         @OnClick({R.id.ll_option_root, R.id.tv_option})
@@ -118,6 +128,11 @@ public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.OptionsV
                 return;
             }
             if (!isViewingSolution) {
+                if (!singleQuestion.isHasMultipleAnswer()) {
+                    for (QuestionOption questionOption : optionsList) {
+                        questionOption.setSelected(false);
+                    }
+                }
                 QuestionOption option = optionsList.get(getAdapterPosition());
                 option.setSelected(!option.getSelected());
                 notifyDataSetChanged();

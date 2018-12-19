@@ -18,12 +18,14 @@
             android:orientation="vertical"
             android:visibility="gone">
 
+
             <org.sufficientlysecure.htmltextview.HtmlTextView
                 android:id="@+id/tv_paragraph"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorPrimaryText"
                 android:textSize="18sp"
+                android:textAppearance="@android:style/TextAppearance.Large"
                 tools:text="@string/long_test_text" />
 
             <View

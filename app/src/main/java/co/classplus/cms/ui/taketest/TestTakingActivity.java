@@ -102,7 +102,7 @@ public class TestTakingActivity extends BaseActivity implements TestTakingView, 
 
         sectionsMap = new HashMap<>();
 
-        presenter.fetchTestDetails("5c192fb04c70a80b57d1221d");
+        presenter.fetchTestDetails("5c1978e9da4d340e87f29b9d");
     }
 
     private ArrayList<SingleQuestion> getTestData() {
@@ -175,7 +175,8 @@ public class TestTakingActivity extends BaseActivity implements TestTakingView, 
                 })
                 .setNegativeButton("Cancel", (dialog, which) -> {
                     dialog.dismiss();
-                });
+                })
+                .setCancelable(false);
         builder.create().show();
     }
 

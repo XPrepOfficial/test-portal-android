@@ -138,12 +138,13 @@ public class SingleQuesFragment extends BaseFragment implements SingleQuesView {
             ll_paragraph.setVisibility(View.GONE);
         } else {
             ll_paragraph.setVisibility(View.VISIBLE);
-            tv_paragraph.setHtml(singleQuestion.getParagraph().getDescription(), new HtmlHttpImageGetter(tv_paragraph));
+            tv_paragraph.setHtml(singleQuestion.getParagraph().getDescription(), new HtmlHttpImageGetter(tv_paragraph, null, true));
         }
 
-        tv_ques_text.setHtml(singleQuestion.getQuesText(), new HtmlHttpImageGetter(tv_ques_text));
+        tv_ques_text.setHtml(singleQuestion.getQuesText(), new HtmlHttpImageGetter(tv_ques_text, null, true));
         optionsAdapter.clearOptions();
         optionsAdapter.addOptions(singleQuestion.getOptions());
+        optionsAdapter.setSingleQuestion(singleQuestion);
     }
 
     @OnClick(R.id.ll_review)
