@@ -23,6 +23,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.Ques
     private Context context;
     private int offset;
     private int selectedIndex;
+    private boolean isViewingSolution;
     private String selectedQuestionId = "1234a";
     private ArrayList<SingleQuestion> questions;
     private QuestionsListener questionsListener;
@@ -34,12 +35,12 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.Ques
         this.questionsListener = questionsListener;
     }
 
-    void clearQuestions() {
+    public void clearQuestions() {
         this.questions.clear();
         notifyDataSetChanged();
     }
 
-    void addQuestions(ArrayList<SingleQuestion> questions) {
+    public void addQuestions(ArrayList<SingleQuestion> questions) {
         this.questions.addAll(questions);
         notifyDataSetChanged();
     }
@@ -58,6 +59,14 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.Ques
 
     public void setSelectedIndex(int selectedIndex) {
         this.selectedIndex = selectedIndex;
+    }
+
+    public boolean isViewingSolution() {
+        return isViewingSolution;
+    }
+
+    public void setViewingSolution(boolean viewingSolution) {
+        isViewingSolution = viewingSolution;
     }
 
     public void onPrevClicked() {
@@ -89,8 +98,12 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.Ques
     public void onBindViewHolder(@NonNull QuestionViewHolder holder, int position) {
         SingleQuestion question = questions.get(position);
         holder.tv_number.setText(String.valueOf(offset + position + 1));
-        if (question.isMarkedForReview()) {
-            holder.rl_marked_review.setVisibility(View.VISIBLE);
+        if (!isViewingSolution) {
+            if (question.isMarkedForReview()) {
+                holder.rl_marked_review.setVisibility(View.VISIBLE);
+            } else {
+                holder.rl_marked_review.setVisibility(View.GONE);
+            }
         } else {
             holder.rl_marked_review.setVisibility(View.GONE);
         }
@@ -99,10 +112,18 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.Ques
             holder.tv_number.setTextColor(ContextCompat.getColor(context, R.color.white));
         } else {
             holder.rl_selected.setBackground(null);
-            if (question.isAttempted()) {
-                holder.tv_number.setTextColor(ContextCompat.getColor(context, R.color.colorPrimary));
+            if (isViewingSolution) {
+                if (question.isAttempted()) {
+                    if (question.getCorrect()) {
+                        holder.tv_number.setTextColor(ContextCompat.getColor(context, R.color.present_green));
+                    } else {
+                        holder.tv_number.setTextColor(ContextCompat.getColor(context, R.color.absent_red));
+                    }
+                } else {
+                    holder.tv_number.setTextColor(ContextCompat.getColor(context, R.color.colorSecondaryText));
+                }
             } else {
-                holder.tv_number.setTextColor(ContextCompat.getColor(context, R.color.colorSecondaryText));
+                holder.tv_number.setTextColor(ContextCompat.getColor(context, R.color.colorPrimaryText));
             }
         }
     }
@@ -138,7 +159,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.Ques
         }
     }
 
-    interface QuestionsListener {
+    public interface QuestionsListener {
 
         void onQuestionSelected(SingleQuestion singleQuestion);
     }

@@ -77,7 +77,7 @@ public class InstructionsActivity extends BaseActivity implements InstructionsVi
         rv_sections.setAdapter(sectionsAdapter);
         rv_sections.setLayoutManager(new LinearLayoutManager(this));
         ViewCompat.setNestedScrollingEnabled(rv_sections, false);
-        presenter.fetchTestInstructions("5c1978e9da4d340e87f29b9d");
+        presenter.fetchTestInstructions("5c192fb04c70a80b57d1221d");
     }
 
     @Override
@@ -107,7 +107,7 @@ public class InstructionsActivity extends BaseActivity implements InstructionsVi
     public void onTestInstructionsFetched(TestInstructions testInstructions) {
         tv_test_name.setText(testInstructions.getName());
         tv_num_ques.setText(String.format(Locale.ENGLISH, "%d Questions", testInstructions.getTotalNumberOfQuestions()));
-        tv_test_duration.setText(String.format(Locale.ENGLISH, "%s Mins", StringUtils.getDurationFromMillis(testInstructions.getDuration())));
+        tv_test_duration.setText(String.format(Locale.ENGLISH, "%s", StringUtils.getDurationForReports(testInstructions.getDuration())));
         tv_instructions.setText(testInstructions.getInstructions());
         if (testInstructions.getSections().size() < 2) {
             tv_sections_label.setVisibility(View.GONE);

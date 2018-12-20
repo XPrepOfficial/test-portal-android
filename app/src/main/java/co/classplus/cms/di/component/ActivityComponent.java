@@ -4,6 +4,8 @@ import co.classplus.cms.di.PerActivity;
 import co.classplus.cms.di.module.ActivityModule;
 import co.classplus.cms.ui.instructions.InstructionsActivity;
 import co.classplus.cms.ui.question.SingleQuesFragment;
+import co.classplus.cms.ui.report.TestReportActivity;
+import co.classplus.cms.ui.solutions.SolutionsActivity;
 import co.classplus.cms.ui.taketest.TestTakingActivity;
 import dagger.Component;
 
@@ -16,4 +18,8 @@ public interface ActivityComponent {
     void inject(TestTakingActivity testTakingActivity);
 
     void inject(InstructionsActivity instructionsActivity);
+
+    void inject(TestReportActivity testReportActivity);
+
+    void inject(SolutionsActivity solutionsActivity);
 }

@@ -29,6 +29,9 @@ public class Question implements Parcelable {
     @Expose
     @SerializedName("options")
     private ArrayList<QuestionOption> options;
+    @Expose
+    @SerializedName("solution")
+    private String solution;
 
     public Question() {
     }
@@ -89,6 +92,14 @@ public class Question implements Parcelable {
         this.options = options;
     }
 
+    public String getSolution() {
+        return solution;
+    }
+
+    public void setSolution(String solution) {
+        this.solution = solution;
+    }
+
     protected Question(Parcel in) {
         _id = in.readString();
         paragraph = (ParagraphModel) in.readValue(ParagraphModel.class.getClassLoader());
@@ -102,6 +113,7 @@ public class Question implements Parcelable {
         } else {
             options = null;
         }
+        solution = in.readString();
     }
 
     @Override
@@ -123,6 +135,7 @@ public class Question implements Parcelable {
             dest.writeByte((byte) (0x01));
             dest.writeList(options);
         }
+        dest.writeString(solution);
     }
 
     @SuppressWarnings("unused")

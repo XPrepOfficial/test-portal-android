@@ -14,6 +14,12 @@ import co.classplus.cms.ui.instructions.InstructionsView;
 import co.classplus.cms.ui.question.SingleQuesPresenter;
 import co.classplus.cms.ui.question.SingleQuesPresenterImpl;
 import co.classplus.cms.ui.question.SingleQuesView;
+import co.classplus.cms.ui.report.TestReportPresenter;
+import co.classplus.cms.ui.report.TestReportPresenterImpl;
+import co.classplus.cms.ui.report.TestReportView;
+import co.classplus.cms.ui.solutions.SolutionsPresenter;
+import co.classplus.cms.ui.solutions.SolutionsPresenterImpl;
+import co.classplus.cms.ui.solutions.SolutionsView;
 import co.classplus.cms.ui.taketest.TestTakingPresenter;
 import co.classplus.cms.ui.taketest.TestTakingPresenterImpl;
 import co.classplus.cms.ui.taketest.TestTakingView;
@@ -78,6 +84,20 @@ public class ActivityModule {
     @PerActivity
     TestTakingPresenter<TestTakingView> provideTestTakingPresenter(
             TestTakingPresenterImpl<TestTakingView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    TestReportPresenter<TestReportView> provideTestReportPresenter(
+            TestReportPresenterImpl<TestReportView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    SolutionsPresenter<SolutionsView> provideSolutionsPresenter(
+            SolutionsPresenterImpl<SolutionsView> presenter) {
         return presenter;
     }
 }

@@ -76,6 +76,12 @@ public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.OptionsV
             if (option.getCorrect()) {
                 holder.ll_option_root.setBackgroundResource(R.drawable.bg_round_filled_green);
                 holder.tv_option.setTextColor(ContextCompat.getColor(mContext, R.color.white));
+                if (this.singleQuestion != null) {
+                    holder.ll_sol.setVisibility(View.VISIBLE);
+                    holder.tv_sol.setHtml(singleQuestion.getSolution(), holder.solutionImageGetter);
+                } else {
+                    holder.ll_sol.setVisibility(View.GONE);
+                }
             } else {
                 if (option.getSelected()) {
                     holder.ll_option_root.setBackgroundResource(R.drawable.bg_round_empty_red);
@@ -84,6 +90,7 @@ public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.OptionsV
                     holder.ll_option_root.setBackgroundResource(R.drawable.bg_round_empty_gray);
                     holder.tv_option.setTextColor(ContextCompat.getColor(mContext, R.color.colorPrimaryText));
                 }
+                holder.ll_sol.setVisibility(View.GONE);
             }
         } else {
             if (option.getSelected()) {
@@ -128,13 +135,18 @@ public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.OptionsV
                 return;
             }
             if (!isViewingSolution) {
+                QuestionOption option = optionsList.get(getAdapterPosition());
                 if (!singleQuestion.isHasMultipleAnswer()) {
                     for (QuestionOption questionOption : optionsList) {
-                        questionOption.setSelected(false);
+                        if (questionOption.get_id().equals(option.get_id())) {
+                            questionOption.setSelected(!questionOption.getSelected());
+                        } else {
+                            questionOption.setSelected(false);
+                        }
                     }
+                } else {
+                    option.setSelected(!option.getSelected());
                 }
-                QuestionOption option = optionsList.get(getAdapterPosition());
-                option.setSelected(!option.getSelected());
                 notifyDataSetChanged();
             }
         }

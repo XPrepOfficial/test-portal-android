@@ -3,11 +3,20 @@ package co.classplus.cms.data.model.question;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class SingleQuestion extends Question implements Parcelable {
 
     private boolean isMarkedForReview;
+    @Expose
+    @SerializedName("isCorrect")
     private Boolean isCorrect; //specifically made not primitive
+    @Expose
+    @SerializedName("timeTaken")
     private long duration;
+    @Expose
+    @SerializedName("isAttempted")
     private boolean isAttempted;
 
     public SingleQuestion() {

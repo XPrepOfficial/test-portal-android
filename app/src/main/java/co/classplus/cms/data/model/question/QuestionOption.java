@@ -13,7 +13,11 @@ public class QuestionOption extends CmsNameId implements Parcelable {
     @Expose
     @SerializedName("order")
     private int order;
+    @Expose
+    @SerializedName("isCorrect")
     private Boolean isCorrect;
+    @Expose
+    @SerializedName("isMarked")
     private boolean isSelected;
     private String solution;
 

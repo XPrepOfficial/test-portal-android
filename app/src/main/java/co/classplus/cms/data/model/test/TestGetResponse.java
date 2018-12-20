@@ -22,8 +22,19 @@ public class TestGetResponse extends BaseResponseModel {
     public class TestGetData {
 
         @Expose
+        @SerializedName("studentTestId")
+        private String studentTestId;
+        @Expose
         @SerializedName("test")
         private SingleTest test;
+
+        public String getStudentTestId() {
+            return studentTestId;
+        }
+
+        public void setStudentTestId(String studentTestId) {
+            this.studentTestId = studentTestId;
+        }
 
         public SingleTest getTest() {
             return test;

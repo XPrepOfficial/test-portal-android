@@ -1,14 +1,15 @@
 package co.classplus.cms.ui.taketest;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,7 +26,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import co.classplus.cms.R;
 import co.classplus.cms.data.model.base.SectionBaseModel;
+import co.classplus.cms.data.model.question.QuestionOption;
 import co.classplus.cms.data.model.question.SingleQuestion;
+import co.classplus.cms.data.model.submit.SubmitTestResponse;
 import co.classplus.cms.data.model.test.SingleTest;
 import co.classplus.cms.data.model.test.TestGetResponse;
 import co.classplus.cms.data.model.test.TestSection;
@@ -33,8 +36,12 @@ import co.classplus.cms.ui.base.BaseActivity;
 import co.classplus.cms.ui.custom.ScrollCenterLayoutManager;
 import co.classplus.cms.ui.instructions.SectionsAdapter;
 import co.classplus.cms.ui.question.SingleQuesFragment;
+import co.classplus.cms.ui.report.TestReportActivity;
 
-public class TestTakingActivity extends BaseActivity implements TestTakingView, QuestionsAdapter.QuestionsListener, SectionsAdapter.SectionsListener, SingleQuesFragment.SingleQuestionListener {
+public class TestTakingActivity extends BaseActivity implements TestTakingView,
+        QuestionsAdapter.QuestionsListener,
+        SectionsAdapter.SectionsListener,
+        SingleQuesFragment.SingleQuestionListener {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -70,6 +77,8 @@ public class TestTakingActivity extends BaseActivity implements TestTakingView, 
     private SectionsAdapter sectionsAdapter;
     private BottomSheetDialog sectionsBottomSheet;
 
+    private String studentTestId;
+    private SingleTest singleTest;
     private Map<String, TestSection> sectionsMap;
 
     @Override
@@ -93,6 +102,7 @@ public class TestTakingActivity extends BaseActivity implements TestTakingView, 
                 LinearLayoutManager.HORIZONTAL, false));
 
         questionsAdapter = new QuestionsAdapter(this, 0, new ArrayList<>(), this);
+        questionsAdapter.setViewingSolution(false);
         rv_questions.setAdapter(questionsAdapter);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         singleQuesFragment = SingleQuesFragment.newInstance();
@@ -102,7 +112,7 @@ public class TestTakingActivity extends BaseActivity implements TestTakingView, 
 
         sectionsMap = new HashMap<>();
 
-        presenter.fetchTestDetails("5c1978e9da4d340e87f29b9d");
+        presenter.fetchTestDetails("5c192fb04c70a80b57d1221d", 1);
     }
 
     private ArrayList<SingleQuestion> getTestData() {
@@ -168,16 +178,32 @@ public class TestTakingActivity extends BaseActivity implements TestTakingView, 
 
     @OnClick(R.id.tv_submit)
     public void onSubmitClicked() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this)
-                .setTitle("Submit your test")
-                .setPositiveButton("Submit", (dialog, which) -> {
-                    //todo submit test
-                })
-                .setNegativeButton("Cancel", (dialog, which) -> {
-                    dialog.dismiss();
-                })
-                .setCancelable(false);
-        builder.create().show();
+        int totalQues = 0, answeredQues = 0, markedForReview = 0;
+        for (Map.Entry<String, TestSection> entry : sectionsMap.entrySet()) {
+            for (SingleQuestion question : entry.getValue().getQuestions()) {
+                totalQues += 1;
+                for (QuestionOption option : question.getOptions()) {
+                    if (option.getSelected()) {
+                        answeredQues += 1;
+                        break;
+                    }
+                }
+                if (question.isMarkedForReview()) {
+                    markedForReview += 1;
+                }
+            }
+        }
+        showSubmitBottomSheet(totalQues, answeredQues, markedForReview);
+//        AlertDialog.Builder builder = new AlertDialog.Builder(this)
+//                .setTitle("Submit your test")
+//                .setPositiveButton("Submit", (dialog, which) -> {
+//                    //todo submit test
+//                })
+//                .setNegativeButton("Cancel", (dialog, which) -> {
+//                    dialog.dismiss();
+//                })
+//                .setCancelable(false);
+//        builder.create().show();
     }
 
     private void setupSectionsBottomSheet() {
@@ -191,6 +217,26 @@ public class TestTakingActivity extends BaseActivity implements TestTakingView, 
         rv_sections.setLayoutManager(new LinearLayoutManager(this));
 
         sectionsBottomSheet.setContentView(view);
+    }
+
+    private void showSubmitBottomSheet(int totalQuestions, int answeredQues, int markedForReview) {
+        BottomSheetDialog submitBottomSheet = new BottomSheetDialog(this);
+        View view = getLayoutInflater().inflate(R.layout.layout_bottom_sheet_submit_test, null);
+        TextView tv_total_ques = view.findViewById(R.id.tv_total_ques);
+        TextView tv_ques_answered = view.findViewById(R.id.tv_ques_answered);
+        TextView tv_marked_for_review = view.findViewById(R.id.tv_marked_for_review);
+        Button btn_sheet_submit_test = view.findViewById(R.id.btn_sheet_submit_test);
+
+        tv_total_ques.setText(String.valueOf(totalQuestions));
+        tv_ques_answered.setText(String.valueOf(answeredQues));
+        tv_marked_for_review.setText(String.valueOf(markedForReview));
+
+        btn_sheet_submit_test.setOnClickListener(v -> {
+            presenter.submitTest(singleTest, studentTestId, 0);
+            submitBottomSheet.dismiss();
+        });
+        submitBottomSheet.setContentView(view);
+        submitBottomSheet.show();
     }
 
     private void updatePrevNextViews() {
@@ -227,6 +273,8 @@ public class TestTakingActivity extends BaseActivity implements TestTakingView, 
     @Override
     public void onTestDetailsFetched(TestGetResponse testGetResponse) {
         SingleTest singleTest = testGetResponse.getData().getTest();
+        this.singleTest = singleTest;
+        this.studentTestId = testGetResponse.getData().getStudentTestId();
         ArrayList<SectionBaseModel> sectionsList = new ArrayList<>();
         for (TestSection testSection : singleTest.getSections()) {
             sectionsMap.put(testSection.get_id(), testSection);
@@ -247,8 +295,25 @@ public class TestTakingActivity extends BaseActivity implements TestTakingView, 
     }
 
     @Override
+    public void onTestSubmitSuccess(SubmitTestResponse.SubmitTestData data) {
+        startActivity(new Intent(this, TestReportActivity.class)
+                .putExtra(TestReportActivity.PARAM_TIME_TAKEN, data.getTimeTaken())
+                .putExtra(TestReportActivity.PARAM_CORRECT_ANSWERS, data.getCorrectAnswers())
+                .putExtra(TestReportActivity.PARAM_INCORRECT_ANSWERS, data.getNumberOfQuestionsAttempted() - data.getCorrectAnswers())
+                .putExtra(TestReportActivity.PARAM_UNANSWERED_ANSWERS, data.getTotalQuestion() - data.getNumberOfQuestionsAttempted())
+                .putExtra(TestReportActivity.PARAM_TEST_ID, singleTest.get_id())
+                .putExtra(TestReportActivity.PARAM_STUDENT_TEST_ID, studentTestId));
+        finish();
+    }
+
+    @Override
+    public void onTestSubmitError() {
+        showSnackBar("Error!! Please try again...");
+    }
+
+    @Override
     public void onQuestionSelected(SingleQuestion singleQuestion) {
-        singleQuesFragment.replaceQuestion(singleQuestion);
+        singleQuesFragment.replaceQuestion(singleQuestion, false);
         updatePrevNextViews();
     }
 
