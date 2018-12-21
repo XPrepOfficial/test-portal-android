@@ -5,7 +5,7 @@ import co.classplus.cms.ui.base.MvpPresenter;
 
 public interface TestTakingPresenter<V extends TestTakingView> extends MvpPresenter<V> {
 
-    void fetchTestDetails(String testId, int studentId);
+    void fetchTestDetails(String accessToken, String testId, int studentId);
 
-    void submitTest(SingleTest singleTest, String studentTestId, long timeTaken);
+    void submitTest(String accessToken, SingleTest singleTest, String studentTestId, long timeTaken);
 }

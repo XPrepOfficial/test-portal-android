@@ -22,10 +22,10 @@ public class SolutionsPresenterImpl<V extends SolutionsView> extends BasePresent
     }
 
     @Override
-    public void fetchTestSolutions(String testId, String studentTestId) {
+    public void fetchTestSolutions(String accessToken, String testId, String studentTestId) {
         getMvpView().showLoading();
         getCompositeDisposable().add(getDataManager()
-                .getTestSolutions(testId, studentTestId)
+                .getTestSolutions(accessToken, testId, studentTestId)
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(testSolutionResponse -> {

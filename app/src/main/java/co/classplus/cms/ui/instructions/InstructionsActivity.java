@@ -90,7 +90,7 @@ public class InstructionsActivity extends BaseActivity implements InstructionsVi
         rv_sections.setAdapter(sectionsAdapter);
         rv_sections.setLayoutManager(new LinearLayoutManager(this));
         ViewCompat.setNestedScrollingEnabled(rv_sections, false);
-        presenter.fetchTestInstructions(testId);
+        presenter.fetchTestInstructions(cmsAccessToken, testId);
     }
 
     @Override

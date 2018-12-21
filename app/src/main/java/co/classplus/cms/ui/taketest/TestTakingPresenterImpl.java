@@ -31,10 +31,10 @@ public class TestTakingPresenterImpl<V extends TestTakingView> extends BasePrese
     }
 
     @Override
-    public void fetchTestDetails(String testId, int studentId) {
+    public void fetchTestDetails(String accessToken, String testId, int studentId) {
         getMvpView().showLoading();
         getCompositeDisposable().add(getDataManager()
-                .startTestApi(getStartTestJson(testId, "batchTestId", "email", "mobile", "name", studentId))
+                .startTestApi(accessToken, getStartTestJson(testId))
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(testGetResponse -> {
@@ -56,10 +56,10 @@ public class TestTakingPresenterImpl<V extends TestTakingView> extends BasePrese
     }
 
     @Override
-    public void submitTest(SingleTest singleTest, String studentTestId, long timeTaken) {
+    public void submitTest(String accessToken, SingleTest singleTest, String studentTestId, long timeTaken) {
         getMvpView().showLoading();
         getCompositeDisposable().add(getDataManager()
-                .submitTest(getSubmitTestJson(singleTest, studentTestId, timeTaken))
+                .submitTest(accessToken, getSubmitTestJson(singleTest, studentTestId, timeTaken))
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(submitTestResponse -> {
@@ -80,18 +80,18 @@ public class TestTakingPresenterImpl<V extends TestTakingView> extends BasePrese
                 }));
     }
 
-    private JsonObject getStartTestJson(String testId, String batchTestId, String email, String mobile, String name, int studentId) {
+    private JsonObject getStartTestJson(String testId) {
         JsonObject rootObject = new JsonObject();
         rootObject.addProperty("testId", testId);
 
-        JsonObject studentDataObject = new JsonObject();
-        studentDataObject.addProperty("batchTestId", batchTestId);
-        studentDataObject.addProperty("email", email);
-        studentDataObject.addProperty("mobile", mobile);
-        studentDataObject.addProperty("name", name);
-        studentDataObject.addProperty("studentId", studentId);
+//        JsonObject studentDataObject = new JsonObject();
+//        studentDataObject.addProperty("batchTestId", batchTestId);
+//        studentDataObject.addProperty("email", email);
+//        studentDataObject.addProperty("mobile", mobile);
+//        studentDataObject.addProperty("name", name);
+//        studentDataObject.addProperty("studentId", studentId);
 
-        rootObject.add("studentData", studentDataObject);
+//        rootObject.add("studentData", studentDataObject);
         return rootObject;
     }
 

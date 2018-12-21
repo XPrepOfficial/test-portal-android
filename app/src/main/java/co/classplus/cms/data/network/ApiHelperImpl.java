@@ -19,37 +19,37 @@ public class ApiHelperImpl implements ApiHelper {
     }
 
     @Override
-    public Observable<TestInstructionsResponse> getTestInstructions(String testId) {
+    public Observable<TestInstructionsResponse> getTestInstructions(String accessToken, String testId) {
         return NetworkSingleton.getInstance()
                 .getNetworkClient()
-                .create(ApiHelper.class).getTestInstructions(testId);
+                .create(ApiHelper.class).getTestInstructions(accessToken, testId);
     }
 
     @Override
-    public Observable<TestGetResponse> getTestDetails(String testId) {
+    public Observable<TestGetResponse> getTestDetails(String accessToken, String testId) {
         return NetworkSingleton.getInstance()
                 .getNetworkClient()
-                .create(ApiHelper.class).getTestDetails(testId);
+                .create(ApiHelper.class).getTestDetails(accessToken, testId);
     }
 
     @Override
-    public Observable<TestGetResponse> startTestApi(JsonObject jsonObject) {
+    public Observable<TestGetResponse> startTestApi(String accessToken, JsonObject jsonObject) {
         return NetworkSingleton.getInstance()
                 .getNetworkClient()
-                .create(ApiHelper.class).startTestApi(jsonObject);
+                .create(ApiHelper.class).startTestApi(accessToken, jsonObject);
     }
 
     @Override
-    public Observable<SubmitTestResponse> submitTest(JsonObject jsonObject) {
+    public Observable<SubmitTestResponse> submitTest(String accessToken, JsonObject jsonObject) {
         return NetworkSingleton.getInstance()
                 .getNetworkClient()
-                .create(ApiHelper.class).submitTest(jsonObject);
+                .create(ApiHelper.class).submitTest(accessToken, jsonObject);
     }
 
     @Override
-    public Observable<TestSolutionResponse> getTestSolutions(String testId, String studentTestId) {
+    public Observable<TestSolutionResponse> getTestSolutions(String accessToken, String testId, String studentTestId) {
         return NetworkSingleton.getInstance()
                 .getNetworkClient()
-                .create(ApiHelper.class).getTestSolutions(testId, studentTestId);
+                .create(ApiHelper.class).getTestSolutions(accessToken, testId, studentTestId);
     }
 }

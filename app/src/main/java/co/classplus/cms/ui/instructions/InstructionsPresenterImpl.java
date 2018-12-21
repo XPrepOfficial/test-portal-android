@@ -23,10 +23,10 @@ public class InstructionsPresenterImpl<V extends InstructionsView> extends BaseP
     }
 
     @Override
-    public void fetchTestInstructions(String testId) {
+    public void fetchTestInstructions(String accessToken, String testId) {
         getMvpView().showLoading();
         getCompositeDisposable().add(getDataManager()
-                .getTestInstructions(testId)
+                .getTestInstructions(accessToken, testId)
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(testInstructionsResponse -> {

@@ -33,27 +33,27 @@ public class DataManagerImpl implements DataManager {
     }
 
     @Override
-    public Observable<TestInstructionsResponse> getTestInstructions(String testId) {
-        return mApiHelper.getTestInstructions(testId);
+    public Observable<TestInstructionsResponse> getTestInstructions(String accessToken, String testId) {
+        return mApiHelper.getTestInstructions(accessToken, testId);
     }
 
     @Override
-    public Observable<TestGetResponse> getTestDetails(String testId) {
-        return mApiHelper.getTestDetails(testId);
+    public Observable<TestGetResponse> getTestDetails(String accessToken, String testId) {
+        return mApiHelper.getTestDetails(accessToken, testId);
     }
 
     @Override
-    public Observable<TestGetResponse> startTestApi(JsonObject jsonObject) {
-        return mApiHelper.startTestApi(jsonObject);
+    public Observable<TestGetResponse> startTestApi(String accessToken, JsonObject jsonObject) {
+        return mApiHelper.startTestApi(accessToken, jsonObject);
     }
 
     @Override
-    public Observable<SubmitTestResponse> submitTest(JsonObject jsonObject) {
-        return mApiHelper.submitTest(jsonObject);
+    public Observable<SubmitTestResponse> submitTest(String accessToken, JsonObject jsonObject) {
+        return mApiHelper.submitTest(accessToken, jsonObject);
     }
 
     @Override
-    public Observable<TestSolutionResponse> getTestSolutions(String testId, String studentTestId) {
-        return mApiHelper.getTestSolutions(testId, studentTestId);
+    public Observable<TestSolutionResponse> getTestSolutions(String accessToken, String testId, String studentTestId) {
+        return mApiHelper.getTestSolutions(accessToken, testId, studentTestId);
     }
 }

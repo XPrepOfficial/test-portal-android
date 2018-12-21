@@ -135,7 +135,7 @@ public class TestTakingActivity extends BaseActivity implements TestTakingView,
 
         sectionsMap = new HashMap<>();
 
-        presenter.fetchTestDetails(testId, new Random().nextInt(1000) + 1);
+        presenter.fetchTestDetails(cmsAccessToken, testId, new Random().nextInt(1000) + 1);
     }
 
     @Override
@@ -259,7 +259,7 @@ public class TestTakingActivity extends BaseActivity implements TestTakingView,
         btn_sheet_submit_test.setOnClickListener(v -> {
             stopTimer();
             endTime = System.currentTimeMillis();
-            presenter.submitTest(singleTest, studentTestId, endTime - startTime);
+            presenter.submitTest(cmsAccessToken, singleTest, studentTestId, endTime - startTime);
             submitBottomSheet.dismiss();
         });
         submitBottomSheet.setContentView(view);
@@ -303,7 +303,7 @@ public class TestTakingActivity extends BaseActivity implements TestTakingView,
                 .setTitle("Time's Up")
                 .setMessage("Please submit your test, time is over.")
                 .setPositiveButton("Submit", (dialog, which) -> {
-                    presenter.submitTest(singleTest, studentTestId, endTime - startTime);
+                    presenter.submitTest(cmsAccessToken, singleTest, studentTestId, endTime - startTime);
                     dialog.dismiss();
                 })
                 .setNegativeButton("Cancel", (dialog, which) -> {

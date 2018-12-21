@@ -18,6 +18,8 @@ import co.classplus.cms.ui.base.BaseActivity;
 import co.classplus.cms.ui.solutions.SolutionsActivity;
 import co.classplus.cms.utils.StringUtils;
 
+import static co.classplus.cms.ui.instructions.InstructionsActivity.PARAM_CMS_ACT;
+
 public class TestReportActivity extends BaseActivity implements TestReportView {
 
     public static final String PARAM_TIME_TAKEN = "PARAM_TIME_TAKEN";
@@ -47,6 +49,7 @@ public class TestReportActivity extends BaseActivity implements TestReportView {
     private int correctAnswers, incorrectAnswers, unansweredAnswers;
     private String testId;
     private String studentTestId;
+    private String cmsAccessToken;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +58,8 @@ public class TestReportActivity extends BaseActivity implements TestReportView {
 
         if (!getIntent().hasExtra(PARAM_TIME_TAKEN) || !getIntent().hasExtra(PARAM_CORRECT_ANSWERS)
                 || !getIntent().hasExtra(PARAM_INCORRECT_ANSWERS) || !getIntent().hasExtra(PARAM_UNANSWERED_ANSWERS)
-                || !getIntent().hasExtra(PARAM_TEST_ID) || !getIntent().hasExtra(PARAM_STUDENT_TEST_ID)) {
+                || !getIntent().hasExtra(PARAM_TEST_ID) || !getIntent().hasExtra(PARAM_STUDENT_TEST_ID)
+                || !getIntent().hasExtra(PARAM_CMS_ACT)) {
             showToast("Error loading data!!");
             finish();
         } else {
@@ -65,6 +69,7 @@ public class TestReportActivity extends BaseActivity implements TestReportView {
             unansweredAnswers = getIntent().getIntExtra(PARAM_UNANSWERED_ANSWERS, 0);
             testId = getIntent().getStringExtra(PARAM_TEST_ID);
             studentTestId = getIntent().getStringExtra(PARAM_STUDENT_TEST_ID);
+            cmsAccessToken = getIntent().getStringExtra(PARAM_CMS_ACT);
         }
 
         setupDependencies();
@@ -96,7 +101,8 @@ public class TestReportActivity extends BaseActivity implements TestReportView {
     public void onCheckSolutionsClicked() {
         startActivity(new Intent(this, SolutionsActivity.class)
                 .putExtra(PARAM_TEST_ID, testId)
-                .putExtra(PARAM_STUDENT_TEST_ID, studentTestId));
+                .putExtra(PARAM_STUDENT_TEST_ID, studentTestId)
+                .putExtra(PARAM_CMS_ACT, cmsAccessToken));
         finish();
     }
 

@@ -25,6 +25,7 @@ import co.classplus.cms.ui.custom.ScrollCenterLayoutManager;
 import co.classplus.cms.ui.question.SingleQuesFragment;
 import co.classplus.cms.ui.taketest.QuestionsAdapter;
 
+import static co.classplus.cms.ui.instructions.InstructionsActivity.PARAM_CMS_ACT;
 import static co.classplus.cms.ui.report.TestReportActivity.PARAM_STUDENT_TEST_ID;
 import static co.classplus.cms.ui.report.TestReportActivity.PARAM_TEST_ID;
 
@@ -53,18 +54,21 @@ public class SolutionsActivity extends BaseActivity implements SolutionsView,
     private SingleQuesFragment singleQuesFragment;
     private String testId;
     private String studentTestId;
+    private String cmsAccessToken;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_solutions);
 
-        if (!getIntent().hasExtra(PARAM_TEST_ID) || !getIntent().hasExtra(PARAM_STUDENT_TEST_ID)) {
+        if (!getIntent().hasExtra(PARAM_TEST_ID) || !getIntent().hasExtra(PARAM_STUDENT_TEST_ID)
+                || !getIntent().hasExtra(PARAM_CMS_ACT)) {
             showToast("Error loading data!!");
             finish();
         } else {
             testId = getIntent().getStringExtra(PARAM_TEST_ID);
             studentTestId = getIntent().getStringExtra(PARAM_STUDENT_TEST_ID);
+            cmsAccessToken = getIntent().getStringExtra(PARAM_CMS_ACT);
         }
 
         setupDependencies();
@@ -98,7 +102,7 @@ public class SolutionsActivity extends BaseActivity implements SolutionsView,
         singleQuesFragment.setSingleQuestionListener(this);
         transaction.add(R.id.frame_ques_container, singleQuesFragment, SingleQuesFragment.TAG).commit();
 
-        presenter.fetchTestSolutions(testId, studentTestId);
+        presenter.fetchTestSolutions(cmsAccessToken, testId, studentTestId);
     }
 
     @OnClick(R.id.ll_prev)

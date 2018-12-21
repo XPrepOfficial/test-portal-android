@@ -9,23 +9,24 @@ import co.classplus.cms.data.model.test.TestInstructionsResponse;
 import io.reactivex.Observable;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface ApiHelper {
 
     @GET("test/{testId}/instructions")
-    Observable<TestInstructionsResponse> getTestInstructions(@Path("testId") String testId);
+    Observable<TestInstructionsResponse> getTestInstructions(@Header("x-cms-access-token") String accessToken, @Path("testId") String testId);
 
     @GET("test/{testId}")
-    Observable<TestGetResponse> getTestDetails(@Path("testId") String testId);
+    Observable<TestGetResponse> getTestDetails(@Header("x-cms-access-token") String accessToken, @Path("testId") String testId);
 
     @POST("test/start")
-    Observable<TestGetResponse> startTestApi(@Body JsonObject jsonObject);
+    Observable<TestGetResponse> startTestApi(@Header("x-cms-access-token") String accessToken, @Body JsonObject jsonObject);
 
     @POST("test/evaluate")
-    Observable<SubmitTestResponse> submitTest(@Body JsonObject jsonObject);
+    Observable<SubmitTestResponse> submitTest(@Header("x-cms-access-token") String accessToken, @Body JsonObject jsonObject);
 
     @GET("test/{testId}/student/{studentTestId}/solutions")
-    Observable<TestSolutionResponse> getTestSolutions(@Path("testId") String testId, @Path("studentTestId") String studentTestId);
+    Observable<TestSolutionResponse> getTestSolutions(@Header("x-cms-access-token") String accessToken, @Path("testId") String testId, @Path("studentTestId") String studentTestId);
 }
