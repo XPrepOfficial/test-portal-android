@@ -9,11 +9,12 @@ import org.sufficientlysecure.htmltextview.HtmlTextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import co.classplus.cms.R;
+import co.classplus.cms.R2;
 import co.classplus.cms.ui.instructions.InstructionsActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    @BindView(R.id.tv_html)
+    @BindView(R2.id.tv_html)
     HtmlTextView htmlTextView;
 
     @Override

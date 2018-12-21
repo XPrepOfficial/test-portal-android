@@ -30,6 +30,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import co.classplus.cms.R;
+import co.classplus.cms.R2;
 import co.classplus.cms.data.model.base.SectionBaseModel;
 import co.classplus.cms.data.model.question.QuestionOption;
 import co.classplus.cms.data.model.question.SingleQuestion;
@@ -52,30 +53,30 @@ public class TestTakingActivity extends BaseActivity implements TestTakingView,
         SectionsAdapter.SectionsListener,
         SingleQuesFragment.SingleQuestionListener {
 
-    @BindView(R.id.toolbar)
+    @BindView(R2.id.toolbar)
     Toolbar toolbar;
-    @BindView(R.id.ll_timer)
+    @BindView(R2.id.ll_timer)
     View ll_timer;
-    @BindView(R.id.tv_timer)
+    @BindView(R2.id.tv_timer)
     TextView tv_timer;
-    @BindView(R.id.ll_section)
+    @BindView(R2.id.ll_section)
     View ll_section;
-    @BindView(R.id.tv_section)
+    @BindView(R2.id.tv_section)
     TextView tv_section;
 
-    @BindView(R.id.rv_questions)
+    @BindView(R2.id.rv_questions)
     RecyclerView rv_questions;
-    @BindView(R.id.frame_ques_container)
+    @BindView(R2.id.frame_ques_container)
     FrameLayout frame_ques_container;
-    @BindView(R.id.ll_prev)
+    @BindView(R2.id.ll_prev)
     View ll_prev;
-    @BindView(R.id.iv_prev)
+    @BindView(R2.id.iv_prev)
     ImageView iv_prev;
-    @BindView(R.id.tv_prev)
+    @BindView(R2.id.tv_prev)
     TextView tv_prev;
-    @BindView(R.id.ll_next)
+    @BindView(R2.id.ll_next)
     View ll_next;
-    @BindView(R.id.tv_submit)
+    @BindView(R2.id.tv_submit)
     TextView tv_submit;
 
     @Inject
@@ -184,19 +185,19 @@ public class TestTakingActivity extends BaseActivity implements TestTakingView,
         return questions;
     }
 
-    @OnClick(R.id.ll_section)
+    @OnClick(R2.id.ll_section)
     public void onSectionsClicked() {
         if (sectionsBottomSheet != null) {
             sectionsBottomSheet.show();
         }
     }
 
-    @OnClick(R.id.ll_prev)
+    @OnClick(R2.id.ll_prev)
     public void onPrevClicked() {
         questionsAdapter.onPrevClicked();
     }
 
-    @OnClick(R.id.ll_next)
+    @OnClick(R2.id.ll_next)
     public void onNextClicked() {
         if (sectionsAdapter.getSelectedIndex() == sectionsAdapter.getItemCount() - 1) {
             questionsAdapter.onNextClicked();
@@ -211,7 +212,7 @@ public class TestTakingActivity extends BaseActivity implements TestTakingView,
         }
     }
 
-    @OnClick(R.id.tv_submit)
+    @OnClick(R2.id.tv_submit)
     public void onSubmitClicked() {
         int totalQues = 0, answeredQues = 0, markedForReview = 0;
         for (Map.Entry<String, TestSection> entry : sectionsMap.entrySet()) {

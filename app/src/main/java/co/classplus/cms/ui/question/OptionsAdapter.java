@@ -17,6 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import co.classplus.cms.R;
+import co.classplus.cms.R2;
 import co.classplus.cms.data.model.question.QuestionOption;
 import co.classplus.cms.data.model.question.SingleQuestion;
 
@@ -110,13 +111,13 @@ public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.OptionsV
 
     class OptionsViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.tv_option)
+        @BindView(R2.id.tv_option)
         HtmlTextView tv_option;
-        @BindView(R.id.ll_sol)
+        @BindView(R2.id.ll_sol)
         View ll_sol;
-        @BindView(R.id.tv_sol)
+        @BindView(R2.id.tv_sol)
         HtmlTextView tv_sol;
-        @BindView(R.id.ll_option_root)
+        @BindView(R2.id.ll_option_root)
         View ll_option_root;
 
         HtmlHttpImageGetter optionImageGetter;
@@ -129,7 +130,7 @@ public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.OptionsV
             solutionImageGetter = new HtmlHttpImageGetter(tv_sol, null, true);
         }
 
-        @OnClick({R.id.ll_option_root, R.id.tv_option})
+        @OnClick({R2.id.ll_option_root, R2.id.tv_option})
         public void onRootViewClicked() {
             if (getAdapterPosition() == RecyclerView.NO_POSITION) {
                 return;
