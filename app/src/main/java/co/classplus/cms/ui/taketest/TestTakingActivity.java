@@ -2,9 +2,11 @@ package co.classplus.cms.ui.taketest;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -18,6 +20,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.inject.Inject;
 
@@ -37,6 +42,7 @@ import co.classplus.cms.ui.custom.ScrollCenterLayoutManager;
 import co.classplus.cms.ui.instructions.SectionsAdapter;
 import co.classplus.cms.ui.question.SingleQuesFragment;
 import co.classplus.cms.ui.report.TestReportActivity;
+import co.classplus.cms.utils.StringUtils;
 
 public class TestTakingActivity extends BaseActivity implements TestTakingView,
         QuestionsAdapter.QuestionsListener,
@@ -77,8 +83,11 @@ public class TestTakingActivity extends BaseActivity implements TestTakingView,
     private SectionsAdapter sectionsAdapter;
     private BottomSheetDialog sectionsBottomSheet;
 
+    private Timer timer;
+    private Handler handler;
     private String studentTestId;
     private SingleTest singleTest;
+    private long startTime, endTime;
     private Map<String, TestSection> sectionsMap;
 
     @Override
@@ -109,10 +118,23 @@ public class TestTakingActivity extends BaseActivity implements TestTakingView,
         singleQuesFragment.setSingleQuestionListener(this);
         transaction.add(R.id.frame_ques_container, singleQuesFragment, SingleQuesFragment.TAG).commit();
         setupSectionsBottomSheet();
+        setupTimer();
 
         sectionsMap = new HashMap<>();
 
-        presenter.fetchTestDetails("5c192fb04c70a80b57d1221d", 1);
+        presenter.fetchTestDetails("5c192fb04c70a80b57d1221d", new Random().nextInt(1000) + 1);
+    }
+
+    @Override
+    protected void onPause() {
+        stopTimer();
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        startTimer();
+        super.onResume();
     }
 
     private ArrayList<SingleQuestion> getTestData() {
@@ -194,16 +216,6 @@ public class TestTakingActivity extends BaseActivity implements TestTakingView,
             }
         }
         showSubmitBottomSheet(totalQues, answeredQues, markedForReview);
-//        AlertDialog.Builder builder = new AlertDialog.Builder(this)
-//                .setTitle("Submit your test")
-//                .setPositiveButton("Submit", (dialog, which) -> {
-//                    //todo submit test
-//                })
-//                .setNegativeButton("Cancel", (dialog, which) -> {
-//                    dialog.dismiss();
-//                })
-//                .setCancelable(false);
-//        builder.create().show();
     }
 
     private void setupSectionsBottomSheet() {
@@ -232,11 +244,65 @@ public class TestTakingActivity extends BaseActivity implements TestTakingView,
         tv_marked_for_review.setText(String.valueOf(markedForReview));
 
         btn_sheet_submit_test.setOnClickListener(v -> {
-            presenter.submitTest(singleTest, studentTestId, 0);
+            stopTimer();
+            endTime = System.currentTimeMillis();
+            presenter.submitTest(singleTest, studentTestId, endTime - startTime);
             submitBottomSheet.dismiss();
         });
         submitBottomSheet.setContentView(view);
         submitBottomSheet.show();
+    }
+
+    private void setupTimer() {
+        handler = new Handler();
+    }
+
+    private void startTimer() {
+        if (startTime == 0) {
+            return;
+        }
+        timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(() -> {
+                    updateTimerView();
+                    checkIfTimeLeft();
+                });
+            }
+        }, 0, 1000);
+    }
+
+    private void updateTimerView() {
+        tv_timer.setText(StringUtils.getDurationFromMillis(System.currentTimeMillis() - startTime));
+    }
+
+    private void checkIfTimeLeft() {
+        if (System.currentTimeMillis() - startTime > (singleTest.getDuration() + 30000)) {
+            stopTimer();
+            endTime = System.currentTimeMillis();
+            showSubmitDialog();
+        }
+    }
+
+    private void showSubmitDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this)
+                .setTitle("Time's Up")
+                .setMessage("Please submit your test, time is over.")
+                .setPositiveButton("Submit", (dialog, which) -> {
+                    presenter.submitTest(singleTest, studentTestId, endTime - startTime);
+                    dialog.dismiss();
+                })
+                .setNegativeButton("Cancel", (dialog, which) -> {
+                    dialog.dismiss();
+                })
+                .setCancelable(false);
+        builder.create().show();
+    }
+
+    private void stopTimer() {
+        timer.cancel();
+        handler.removeCallbacksAndMessages(null);
     }
 
     private void updatePrevNextViews() {
@@ -292,6 +358,8 @@ public class TestTakingActivity extends BaseActivity implements TestTakingView,
             ll_section.setVisibility(View.VISIBLE);
         }
         updatePrevNextViews();
+        startTime = System.currentTimeMillis();
+        startTimer();
     }
 
     @Override
@@ -314,6 +382,7 @@ public class TestTakingActivity extends BaseActivity implements TestTakingView,
     @Override
     public void onQuestionSelected(SingleQuestion singleQuestion) {
         singleQuesFragment.replaceQuestion(singleQuestion, false);
+//        rv_questions.smoothScrollToPosition(questionsAdapter.getSelectedIndex());
         updatePrevNextViews();
     }
 

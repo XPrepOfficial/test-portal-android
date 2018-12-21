@@ -122,6 +122,7 @@ public class SolutionsActivity extends BaseActivity implements SolutionsView,
     @Override
     public void onQuestionSelected(SingleQuestion singleQuestion) {
         singleQuesFragment.replaceQuestion(singleQuestion, true);
+//        rv_questions.smoothScrollToPosition(questionsAdapter.getSelectedIndex());
     }
 
     @Override
