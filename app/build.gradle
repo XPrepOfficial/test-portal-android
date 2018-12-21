@@ -1,10 +1,11 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
+apply plugin: 'com.jakewharton.butterknife'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
     defaultConfig {
-        applicationId "co.classplus.module.cms"
+//        applicationId "co.classplus.module.cms"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -19,8 +20,7 @@ android {
             buildConfigField("boolean", "IS_DEBUG", "true")
         }
         release {
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            minifyEnabled false
             buildConfigField("String", "BASE_URL", "\"http://students-api.classplus.co/api/\"")
             buildConfigField("boolean", "IS_DEBUG", "false")
         }

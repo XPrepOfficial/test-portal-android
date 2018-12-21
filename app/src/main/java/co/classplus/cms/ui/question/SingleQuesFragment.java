@@ -21,6 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import co.classplus.cms.R;
+import co.classplus.cms.R2;
 import co.classplus.cms.data.model.question.SingleQuestion;
 import co.classplus.cms.ui.base.BaseFragment;
 import co.classplus.cms.utils.StringUtils;
@@ -30,21 +31,21 @@ public class SingleQuesFragment extends BaseFragment implements SingleQuesView {
     public static final String PARAM_QUES = "PARAM_QUES";
     public static final String TAG = "SingleQuesFragment";
 
-    @BindView(R.id.ll_paragraph)
+    @BindView(R2.id.ll_paragraph)
     View ll_paragraph;
-    @BindView(R.id.tv_paragraph)
+    @BindView(R2.id.tv_paragraph)
     HtmlTextView tv_paragraph;
-    @BindView(R.id.ll_timer)
+    @BindView(R2.id.ll_timer)
     View ll_timer;
-    @BindView(R.id.tv_timer)
+    @BindView(R2.id.tv_timer)
     TextView tv_timer;
-    @BindView(R.id.ll_review)
+    @BindView(R2.id.ll_review)
     View ll_review;
-    @BindView(R.id.tv_review)
+    @BindView(R2.id.tv_review)
     TextView tv_review;
-    @BindView(R.id.tv_ques_text)
+    @BindView(R2.id.tv_ques_text)
     HtmlTextView tv_ques_text;
-    @BindView(R.id.rv_options)
+    @BindView(R2.id.rv_options)
     RecyclerView rv_options;
 
     @Inject
@@ -155,7 +156,7 @@ public class SingleQuesFragment extends BaseFragment implements SingleQuesView {
         optionsAdapter.setSingleQuestion(singleQuestion);
     }
 
-    @OnClick(R.id.ll_review)
+    @OnClick(R2.id.ll_review)
     public void onReviewClicked() {
         if (this.singleQuestion != null) {
             singleQuestion.setMarkedForReview(!singleQuestion.isMarkedForReview());

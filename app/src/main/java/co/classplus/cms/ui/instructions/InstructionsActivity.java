@@ -20,6 +20,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import co.classplus.cms.R;
+import co.classplus.cms.R2;
 import co.classplus.cms.data.model.test.TestInstructions;
 import co.classplus.cms.ui.base.BaseActivity;
 import co.classplus.cms.ui.taketest.TestTakingActivity;
@@ -27,21 +28,21 @@ import co.classplus.cms.utils.StringUtils;
 
 public class InstructionsActivity extends BaseActivity implements InstructionsView {
 
-    @BindView(R.id.toolbar)
+    @BindView(R2.id.toolbar)
     Toolbar toolbar;
-    @BindView(R.id.tv_test_name)
+    @BindView(R2.id.tv_test_name)
     TextView tv_test_name;
-    @BindView(R.id.tv_num_ques)
+    @BindView(R2.id.tv_num_ques)
     TextView tv_num_ques;
-    @BindView(R.id.tv_test_duration)
+    @BindView(R2.id.tv_test_duration)
     TextView tv_test_duration;
-    @BindView(R.id.tv_instructions)
+    @BindView(R2.id.tv_instructions)
     TextView tv_instructions;
-    @BindView(R.id.btn_attempt_test)
+    @BindView(R2.id.btn_attempt_test)
     Button btn_attempt_test;
-    @BindView(R.id.tv_sections_label)
+    @BindView(R2.id.tv_sections_label)
     TextView tv_sections_label;
-    @BindView(R.id.rv_sections)
+    @BindView(R2.id.rv_sections)
     RecyclerView rv_sections;
 
     @Inject
@@ -89,7 +90,7 @@ public class InstructionsActivity extends BaseActivity implements InstructionsVi
         return super.onOptionsItemSelected(item);
     }
 
-    @OnClick(R.id.btn_attempt_test)
+    @OnClick(R2.id.btn_attempt_test)
     public void onAttemptTestClicked() {
         startActivity(new Intent(this, TestTakingActivity.class));
         finish();

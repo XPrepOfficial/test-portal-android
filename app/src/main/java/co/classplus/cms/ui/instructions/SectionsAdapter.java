@@ -17,6 +17,7 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import co.classplus.cms.R;
+import co.classplus.cms.R2;
 import co.classplus.cms.data.model.base.SectionBaseModel;
 import co.classplus.cms.utils.ViewUtils;
 
@@ -88,13 +89,13 @@ public class SectionsAdapter extends RecyclerView.Adapter<SectionsAdapter.ViewHo
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.iv_index)
+        @BindView(R2.id.iv_index)
         CircularImageView iv_index;
-        @BindView(R.id.tv_section_name)
+        @BindView(R2.id.tv_section_name)
         TextView tv_section_name;
-        @BindView(R.id.tv_num_ques)
+        @BindView(R2.id.tv_num_ques)
         TextView tv_num_ques;
-        @BindView(R.id.iv_selected)
+        @BindView(R2.id.iv_selected)
         ImageView iv_selected;
 
         ViewHolder(View itemView) {

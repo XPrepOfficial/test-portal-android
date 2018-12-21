@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import co.classplus.cms.R;
+import co.classplus.cms.R2;
 import co.classplus.cms.data.model.question.SingleQuestion;
 import co.classplus.cms.ui.base.BaseViewHolder;
 
@@ -135,11 +136,11 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.Ques
 
     public class QuestionViewHolder extends BaseViewHolder implements View.OnClickListener {
 
-        @BindView(R.id.rl_selected)
+        @BindView(R2.id.rl_selected)
         RelativeLayout rl_selected;
-        @BindView(R.id.tv_number)
+        @BindView(R2.id.tv_number)
         TextView tv_number;
-        @BindView(R.id.rl_marked_review)
+        @BindView(R2.id.rl_marked_review)
         RelativeLayout rl_marked_review;
 
         QuestionViewHolder(View itemView) {

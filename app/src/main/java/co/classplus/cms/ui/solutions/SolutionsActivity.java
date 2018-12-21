@@ -18,6 +18,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import co.classplus.cms.R;
+import co.classplus.cms.R2;
 import co.classplus.cms.data.model.question.SingleQuestion;
 import co.classplus.cms.data.model.solutions.TestSolutionResponse;
 import co.classplus.cms.ui.base.BaseActivity;
@@ -31,19 +32,19 @@ import static co.classplus.cms.ui.report.TestReportActivity.PARAM_TEST_ID;
 public class SolutionsActivity extends BaseActivity implements SolutionsView,
         QuestionsAdapter.QuestionsListener, SingleQuesFragment.SingleQuestionListener {
 
-    @BindView(R.id.toolbar)
+    @BindView(R2.id.toolbar)
     Toolbar toolbar;
-    @BindView(R.id.rv_questions)
+    @BindView(R2.id.rv_questions)
     RecyclerView rv_questions;
-    @BindView(R.id.frame_ques_container)
+    @BindView(R2.id.frame_ques_container)
     FrameLayout frame_ques_container;
-    @BindView(R.id.ll_prev)
+    @BindView(R2.id.ll_prev)
     View ll_prev;
-    @BindView(R.id.iv_prev)
+    @BindView(R2.id.iv_prev)
     ImageView iv_prev;
-    @BindView(R.id.tv_prev)
+    @BindView(R2.id.tv_prev)
     TextView tv_prev;
-    @BindView(R.id.ll_next)
+    @BindView(R2.id.ll_next)
     View ll_next;
 
     @Inject
@@ -101,12 +102,12 @@ public class SolutionsActivity extends BaseActivity implements SolutionsView,
         presenter.fetchTestSolutions(testId, studentTestId);
     }
 
-    @OnClick(R.id.ll_prev)
+    @OnClick(R2.id.ll_prev)
     public void onPrevClicked() {
         questionsAdapter.onPrevClicked();
     }
 
-    @OnClick(R.id.ll_next)
+    @OnClick(R2.id.ll_next)
     public void onNextClicked() {
         questionsAdapter.onNextClicked();
     }

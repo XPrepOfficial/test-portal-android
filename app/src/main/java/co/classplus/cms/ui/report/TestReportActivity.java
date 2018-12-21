@@ -14,6 +14,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import co.classplus.cms.R;
+import co.classplus.cms.R2;
 import co.classplus.cms.ui.base.BaseActivity;
 import co.classplus.cms.ui.solutions.SolutionsActivity;
 import co.classplus.cms.utils.StringUtils;
@@ -27,17 +28,17 @@ public class TestReportActivity extends BaseActivity implements TestReportView {
     public static final String PARAM_TEST_ID = "PARAM_TEST_ID";
     public static final String PARAM_STUDENT_TEST_ID = "PARAM_STUDENT_TEST_ID";
 
-    @BindView(R.id.toolbar)
+    @BindView(R2.id.toolbar)
     Toolbar toolbar;
-    @BindView(R.id.tv_time_taken)
+    @BindView(R2.id.tv_time_taken)
     TextView tv_time_taken;
-    @BindView(R.id.tv_correct_answers)
+    @BindView(R2.id.tv_correct_answers)
     TextView tv_correct_answers;
-    @BindView(R.id.tv_incorrect_answers)
+    @BindView(R2.id.tv_incorrect_answers)
     TextView tv_incorrect_answers;
-    @BindView(R.id.tv_unanswered_answers)
+    @BindView(R2.id.tv_unanswered_answers)
     TextView tv_unanswered_answers;
-    @BindView(R.id.ll_check_solutions)
+    @BindView(R2.id.ll_check_solutions)
     View ll_check_solutions;
 
     @Inject
@@ -92,7 +93,7 @@ public class TestReportActivity extends BaseActivity implements TestReportView {
         tv_unanswered_answers.setText(String.format(Locale.ENGLISH, "%d Unanswered Question", unansweredAnswers));
     }
 
-    @OnClick(R.id.btn_check_solutions)
+    @OnClick(R2.id.btn_check_solutions)
     public void onCheckSolutionsClicked() {
         startActivity(new Intent(this, SolutionsActivity.class)
                 .putExtra(PARAM_TEST_ID, testId)
