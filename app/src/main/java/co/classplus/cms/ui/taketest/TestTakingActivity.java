@@ -44,6 +44,9 @@ import co.classplus.cms.ui.question.SingleQuesFragment;
 import co.classplus.cms.ui.report.TestReportActivity;
 import co.classplus.cms.utils.StringUtils;
 
+import static co.classplus.cms.ui.instructions.InstructionsActivity.PARAM_CMS_ACT;
+import static co.classplus.cms.ui.instructions.InstructionsActivity.PARAM_TEST_ID;
+
 public class TestTakingActivity extends BaseActivity implements TestTakingView,
         QuestionsAdapter.QuestionsListener,
         SectionsAdapter.SectionsListener,
@@ -89,11 +92,21 @@ public class TestTakingActivity extends BaseActivity implements TestTakingView,
     private SingleTest singleTest;
     private long startTime, endTime;
     private Map<String, TestSection> sectionsMap;
+    private String testId;
+    private String cmsAccessToken;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_taking);
+
+        if (!getIntent().hasExtra(PARAM_TEST_ID) || !getIntent().hasExtra(PARAM_CMS_ACT)) {
+            showToast("Error Loading!!");
+            finish();
+        } else {
+            testId = getIntent().getStringExtra(PARAM_TEST_ID);
+            cmsAccessToken = getIntent().getStringExtra(PARAM_CMS_ACT);
+        }
 
         setupDependencies();
         setupUi();
@@ -122,7 +135,7 @@ public class TestTakingActivity extends BaseActivity implements TestTakingView,
 
         sectionsMap = new HashMap<>();
 
-        presenter.fetchTestDetails("5c192fb04c70a80b57d1221d", new Random().nextInt(1000) + 1);
+        presenter.fetchTestDetails(testId, new Random().nextInt(1000) + 1);
     }
 
     @Override

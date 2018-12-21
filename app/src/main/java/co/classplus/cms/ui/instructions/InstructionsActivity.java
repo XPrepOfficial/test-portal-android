@@ -27,6 +27,9 @@ import co.classplus.cms.utils.StringUtils;
 
 public class InstructionsActivity extends BaseActivity implements InstructionsView {
 
+    public static final String PARAM_TEST_ID = "PARAM_TEST_ID";
+    public static final String PARAM_CMS_ACT = "PARAM_CMS_ACT";
+
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.tv_test_name)
@@ -47,12 +50,22 @@ public class InstructionsActivity extends BaseActivity implements InstructionsVi
     @Inject
     InstructionsPresenter<InstructionsView> presenter;
 
+    private String testId;
+    private String cmsAccessToken;
     private SectionsAdapter sectionsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instructions);
+
+        if (!getIntent().hasExtra(PARAM_TEST_ID) || !getIntent().hasExtra(PARAM_CMS_ACT)) {
+            showToast("Error Loading!!");
+            finish();
+        } else {
+            testId = getIntent().getStringExtra(PARAM_TEST_ID);
+            cmsAccessToken = getIntent().getStringExtra(PARAM_CMS_ACT);
+        }
 
         setupDependencies();
         setupUi();
@@ -77,7 +90,7 @@ public class InstructionsActivity extends BaseActivity implements InstructionsVi
         rv_sections.setAdapter(sectionsAdapter);
         rv_sections.setLayoutManager(new LinearLayoutManager(this));
         ViewCompat.setNestedScrollingEnabled(rv_sections, false);
-        presenter.fetchTestInstructions("5c192fb04c70a80b57d1221d");
+        presenter.fetchTestInstructions(testId);
     }
 
     @Override
