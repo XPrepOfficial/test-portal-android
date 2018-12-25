@@ -2,34 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="co.classplus.cms">
 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-
-    <application
-        android:name=".App"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity
-            android:name=".ui.test.MainActivity"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".ui.taketest.TestTakingActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.instructions.InstructionsActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.report.TestReportActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.solutions.SolutionsActivity"
-            android:screenOrientation="portrait" />
+    <application>
     </application>
 
 </manifest>

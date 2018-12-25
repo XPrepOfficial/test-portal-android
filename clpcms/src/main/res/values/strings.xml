@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Mvp App</string>
+    <string name="long_test_text">Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor</string>
+
+    <!-- network errors-->
+    <string name="api_retry_error">Please retry!</string>
+    <string name="wrong_api_error">Wrong API Endpoint Error!</string>
+    <string name="no_token_provided">Auth Token Missing!</string>
+    <string name="bad_request">Bad API Request!</string>
+    <string name="internal_error">Internal Server Error!</string>
+    <string name="api_default_error">Something wrong happened!</string>
+    <string name="some_error">Some Error Occurred!</string>
+    <string name="connection_error">Check Internet connection</string>
+    <string name="timeout_error">Request timeout error !!</string>
+    <string name="no_internet_error">No Internet Connectivity!</string>
+</resources>
